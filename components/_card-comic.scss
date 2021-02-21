@@ -3,66 +3,48 @@
 
 
 
-
-.resultados-cards-contenedor {
-    margin: 100px;
-  }
-  .card-comic-positionator {
-    margin: 20px;
-  
-    .card-comic-basica {
-      height: $altura-de-card;
-      width: $ancho-de-card;
-  
-      .comic-img-contenedor {
-        display: flex;
-        justify-content: center;
-        img {
-            height: $altura-de-card;
-            width: $ancho-de-card;
-        }
-      }
-    }
-    .comic-titulo-contenedor {
-    //   margin-top: 0;
-    //   margin-bottom: 20px;
-      width: $ancho-de-card;
-h3{
-font-family: $tipografia-principal;
-text-align: center;
-}
-
-    }
-  }
-
-%img-contenedor {
-    max-width: 230px;
-    height: auto;
-    img {
-        width: 100%;
-    }
-}
-
-.card-comic-basica {
+.card-comic-simple-contenedor {
     @extend %is-clickeable !optional;
-    @extend %in-stack;
-   
-    &:hover {
-       @extend %move-up;
-      // border: 10px solid red ;
-    }
-    margin: 0 10px 40px;
+    margin: 0 5px 30px;
     box-shadow: 10px 5px 5px rgb(189, 185, 185);
-    .comic-img-contenedor {
-         @extend %img-contenedor;
+    height: auto;
+    width: calc(100% / 5 - 2 * 10px);;
+    position:relative;
+    &:hover {
+        @extend %move-up;
+        .comic-titulo {
+            color: #ed1d23;
+          }   
     }
+    /*Male: elegi mover toda la tarjeta 
+    y no solo la img como en el proyecto de ADA
+    porque me gusta mas como queda */
+    .comic-img-contenedor {
+        flex-grow: 1;
+        overflow: hidden;
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+      .comic-titulo-contenedor {
+        height: 64px;
+        margin-top: 25px;
+        font-family: $tipografia-principal;
+        .comic-titulo {
+          font-size: 14px;
+          margin: 5px;  
+        }       
+      }
+
 }
+  
 
 
-.comic-titulo {
-    font-size: 14px;
-    margin: 5px;
-}
+
+
+
 
 .card-detalle-contenedor {
     font-family: $tipografia-principal;
@@ -70,7 +52,6 @@ text-align: center;
 .card-comic-detalle-contenedor {
     display:flex;
     .comic-img-contenedor {
-        @extend %img-contenedor;
         margin-right: 20px;
     }
 }

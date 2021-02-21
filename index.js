@@ -70,12 +70,10 @@ const crearTarjetasDeComics = (data) => {
     cantidadDeResultados.textContent = ` ${data.data.total}`;
 
     contenedorDeCards.innerHTML += `
-    <article class="card-comic-positionator">        
-      <div class="card-comic-basica in-stack">
-            <div class="comic-img-contenedor ">              
-              <img src="${comic.thumbnail.path}.jpg" />        
-            </div>   
-      </div>  
+    <article class="card-comic-simple-contenedor">        
+      <div class="comic-img-contenedor ">              
+        <img src="${comic.thumbnail.path}.jpg" />        
+      </div>     
       <div class="comic-titulo-contenedor">
          <h3 class="comic-titulo">${comic.title}</h3>
       </div>

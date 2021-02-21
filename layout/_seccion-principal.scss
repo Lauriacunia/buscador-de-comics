@@ -4,12 +4,13 @@
 
 .seccion-principal {
     font-family: $tipografia-principal;
-    margin: 40px 10px;
+    margin: 50px 60px;
 
 }
 
 .resultados-cards-contenedor {
     @extend %in-grid;
+	justify-content: flex-start;
 }
 
 
