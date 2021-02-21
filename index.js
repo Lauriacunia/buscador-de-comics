@@ -60,6 +60,8 @@ const mostrar = (elemento) => {
 //crearTarjetasDeComics : dibuja las cards de comisc en HTML a partir de la data que recibe como parametro
 
 const crearTarjetasDeComics = (data) => {
+  console.log("Listando tarjetas de comics...")
+
   ocultar(loader)
   comics = data.data.results
 
@@ -84,7 +86,7 @@ const crearTarjetasDeComics = (data) => {
 }
 
 const buscarPersonaje = (url) => {
-  const personaje = {};
+  let personaje = {};
 
   fetch(`${url}?apikey=${API_KEY}`)
     .then((res) => {
@@ -175,11 +177,31 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 }
 
 const crearTarjetasDePersonajes = (data) => {
+  console.log("Creando tarjetas de personajes...")
+  
+  ocultar(loader)
+  personajes = data.data.results
+  console.log(personajes)
 
+  personajes.map((personaje) => {
+    console.log("dentro del map de personajes")
+    console.log(personaje)
+    resultadosTitulo.classList.toggle("is-hidden");
+    cantidadDeResultados.textContent = ` ${data.data.total}`;
 
-  // LOGICA DE CARO
- // guiate por el codigo de la linea 65 a 86
-
+    contenedorDeCards.innerHTML += `
+    
+    <article class= "card-personaje-simple">
+        <div class="personaje-img-contenedor">              
+            <img src="${personaje.thumbnail.path}.${personaje.thumbnail.extension}"/>        
+        </div>   
+        <div class="personaje-nombre-contenedor">
+            <h3 class="personaje-nombre">${personaje.name}</h3>
+        </div>
+    </article>
+             
+        `;
+  });
 
   
 
@@ -189,6 +211,7 @@ const crearTarjetasDePersonajes = (data) => {
 //              tarjetas basicas de comics o personajes
 
 const listarCards = (url) => {
+  console.log("Listando cards...")
 
   borrarContenidoHTML(contenedorDeCards);
   mostrar(resultadosTitulo);
@@ -205,7 +228,10 @@ const listarCards = (url) => {
 
       if(tipo === "comics") {
         crearTarjetasDeComics(data)
-      }else crearTarjetasDePersonajes(data)
+
+      }else {
+        crearTarjetasDePersonajes(data)
+      } 
 
       
       // ABRIR CARD DETALLE DE COMIC CON ONCLICK
@@ -272,25 +298,22 @@ botonesPaginacion.forEach((btnPaginacion) => {
   }
 })
 
+const actualizarBusqueda = () => {
 
-/***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
- *     FORMULARIO - BUSQUEDA POR PARAMETROS
- **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
+  console.log("Chequeando parametros de busqueda...")
 
-formulario.onsubmit = (e) => {
-  console.log("enviaste el formulario")
-  e.preventDefault();
-  mostrar(loader);
   const busqueda = $("#input-search").value;
   const tipo = $("#tipo").value;
   const orden = $("#orden").value;
   let busquedaValue = ``;
+  let queryParams = ``;
 
   if (tipo === 'comics') {
     console.log("buscaste comics")
-    console.log(tipo)
-    console.log(orden)
-    console.log(busqueda)
+    console.log(`Titulo: ${busqueda}`)
+    console.log(`Tipo: ${tipo}`)
+    console.log(`Orden: ${orden}`)
+    
 
     if (busqueda.length) {
       busquedaValue = `&titleStartsWith=${busqueda}`
@@ -312,21 +335,36 @@ formulario.onsubmit = (e) => {
 
   } else {
     console.log("buscaste personajes")
+    console.log(`Titulo: ${busqueda}`)
+    console.log(`Tipo: ${tipo}`)
+    console.log(`Orden: ${orden}`)
 
     if (busqueda.length) {
       queryParams = actualizarQueryParams(`&nameStartWith=${busqueda.value}`)
     }
 
     if (orden.value === 'a-z') {
-      console.log("pronto te mostraremos los personajes que buscaste")
+      queryParams = actualizarQueryParams(`${busquedaValue}&orderBy=name`)
     }
     if (orden.value === 'z-a') {
-      console.log("pronto te mostraremos los personajes que buscaste")
+      queryParams = actualizarQueryParams(`${busquedaValue}&orderBy=-name`)
     }
 
     listarCards(construirURL(getPersonajes, queryParams))
   }
 
+
+}
+/***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
+ *     FORMULARIO - BUSQUEDA POR PARAMETROS
+ **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
+
+formulario.onsubmit = (e) => {
+  console.log("enviaste el formulario")
+  e.preventDefault();
+  mostrar(loader);
+
+  actualizarBusqueda()
 
 }
 
@@ -359,8 +397,9 @@ botonVolver.onclick = () => {
  **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
 
 const inicializar = () => {
+  console.log("Inicializando...")
   mostrar(loader)
-  listarCards(construirURL(getComics, actualizarQueryParams("&orderBy=title")))
+  actualizarBusqueda()
 }
 
 
@@ -369,27 +408,6 @@ inicializar();
 
 
 
-
-/**Rutas comics
- * ordenado a-z
- construirURL(getComics, actualizarQueryParams("&orderBy=title"))
-
- * ordenado z-a
-construirURL(getComics, actualizarQueryParams("&orderBy=-title"))
-
- * de mas nuevo a mas viejo
-construirURL(getComics, actualizarQueryParams("&orderBy=modified"))
-
- * de mas viejo a mas nuevo
- construirURL(getComics, actualizarQueryParams("&orderBy=-modified"))
-
- * Rutas personajes
- * ordenado a-z
- construirURL(getPersonajes, actualizarQueryParams("&orderBy=name"))
-
- * ordenado z-a
- * construirURL(getPersonajes, actualizarQueryParams("&orderBy=name"))
- */
 
 
 //  MAQUETADO DETALLE PERSONAJE
