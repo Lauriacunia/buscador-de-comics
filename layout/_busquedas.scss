@@ -1,15 +1,15 @@
 @import "../abstracts/extends";
 @import "../base/tipography";
 
-.navbar {
+.busquedas-contenedor {
     @extend %in-stack;
+    padding: 20px 60px;
     align-items: flex-start;
     font-family: $tipografia-principal;
     background-color: black;
     color: white;
-    padding: 20px;
-
-    h3 {
+    
+    h2 {
         padding-bottom: 10px;
     }
 }
@@ -22,10 +22,4 @@
 .botones-contenedor {
     display:flex;
     justify-content: flex-end;    
-
-    button {
-        background-color: transparent;
-        border: 1px solid white;
-    }
-
 }

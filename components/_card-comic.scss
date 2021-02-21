@@ -7,7 +7,7 @@
     @extend %is-stack !optional;
     @extend %is-clickeable !optional;
     width: calc(100% / 5 - 2 * 10px);;
-    margin: 0 10px 40px;
+    margin-bottom: 20px;
     
     &:hover {
         .comic-img-contenedor{
@@ -20,12 +20,8 @@
    
     .comic-img-contenedor {
         display:flex;
-        position: relative;
         box-shadow: 0 26px 24px -16px rgb(0 0 0 / 40%);
-        overflow: hidden;
-        margin-bottom: 20px;
         img {
-            height: 100%;
             width: 100%;
         }
     }
