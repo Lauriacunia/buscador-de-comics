@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/63796774/95017429-af58e400-062f-11eb-8de2-d87322729a76.jpg">
+  <img src="https://user-images.githubusercontent.com/63796774/108640609-7fdd3380-7479-11eb-95f0-cc25d99e9131.png">
 </p>
 
 ## Funcionalidad
@@ -12,7 +12,7 @@
 
 # Website
 
-[Mirá aquí La Tienda On line](https://lauriacunia.github.io/buscador-de-comics/.)
+[Mirá aquí el proyecto](https://lauriacunia.github.io/buscador-de-comics/.)
 
 ## Construído con…
 - [x] HTML 5
