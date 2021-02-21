@@ -178,7 +178,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 
 const crearTarjetasDePersonajes = (data) => {
   console.log("Creando tarjetas de personajes...")
-  
+
   ocultar(loader)
   personajes = data.data.results
   console.log(personajes)
@@ -191,7 +191,7 @@ const crearTarjetasDePersonajes = (data) => {
 
     contenedorDeCards.innerHTML += `
     
-    <article class= "card-personaje-simple">
+    <article class= "card-personaje-simple-contenedor">
         <div class="personaje-img-contenedor">              
             <img src="${personaje.thumbnail.path}.${personaje.thumbnail.extension}"/>        
         </div>   

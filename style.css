@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
-.card-comic-basica:hover {
+.card-personaje-simple-contenedor:hover, .card-comic-basica:hover {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -42,7 +42,7 @@ button i {
   background-color: #0085ca;
 }
 
-.card-personaje-simple, .card-comic-basica {
+.card-personaje-simple-contenedor, .card-comic-basica {
   cursor: pointer;
 }
 
@@ -57,14 +57,14 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor, .card-comic-basica {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -97,11 +97,11 @@ button i {
   text-align: center;
 }
 
-.card-personaje-detalle-contenedor .personaje-img-contenedor, .card-comic-detalle-contenedor .comic-img-contenedor, .card-comic-basica .comic-img-contenedor {
+.card-comic-detalle-contenedor .comic-img-contenedor, .card-comic-basica .comic-img-contenedor {
   max-width: 230px;
   height: auto;
 }
-.card-personaje-detalle-contenedor .personaje-img-contenedor img, .card-comic-detalle-contenedor .comic-img-contenedor img, .card-comic-basica .comic-img-contenedor img {
+.card-comic-detalle-contenedor .comic-img-contenedor img, .card-comic-basica .comic-img-contenedor img {
   width: 100%;
 }
 
@@ -136,37 +136,7 @@ button i {
   margin: 20px 0px;
 }
 
-.personaje-nombre-contenedor {
-  padding: 16px 24px 17px 20px;
-  background-color: #151515;
-  color: white;
-  transition: 0.2s;
-}
-.personaje-nombre-contenedor .personaje-nombre {
-  height: 79px;
-}
-
-.personaje-img-contenedor {
-  flex-grow: 1;
-  border-bottom: 4px solid #ed1d23;
-  overflow: hidden;
-}
-.personaje-img-contenedor img {
-  width: 100%;
-}
-
-.card-personaje-simple {
-  width: calc(100% / 6 - 2 * 10px);
-  position: relative;
-}
-.card-personaje-simple:hover img {
-  transform: scale(1.3);
-}
-.card-personaje-simple:hover .personaje-nombre-contenedor {
-  background-color: #ed1d23;
-}
-
-.card-comic-basica, .card-personaje-simple {
+.card-personaje-simple-contenedor, .card-comic-basica {
   cursor: pointer;
 }
 
@@ -181,44 +151,52 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor, .card-comic-basica {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.card-personaje-detalle-contenedor {
-  display: flex;
+.card-personaje-simple-contenedor {
+  margin: 0 10px 40px;
+  box-shadow: 10px 5px 5px #bdb9b9;
+  height: 350px;
+  width: 210px;
+  position: relative;
 }
-.card-personaje-detalle-contenedor .personaje-img-contenedor {
-  margin-right: 20px;
+.card-personaje-simple-contenedor:hover img {
+  transform: scale(1.3);
 }
-
-.personaje-img-contenedor {
+.card-personaje-simple-contenedor:hover .personaje-nombre-contenedor {
+  background-color: #ed1d23;
+}
+.card-personaje-simple-contenedor .personaje-img-contenedor {
   flex-grow: 1;
   border-bottom: 4px solid #ed1d23;
   overflow: hidden;
 }
-.personaje-img-contenedor img {
+.card-personaje-simple-contenedor .personaje-img-contenedor img {
   width: 100%;
+  height: 100%;
 }
-
-.comic-contenido-contenedor {
-  margin-left: 20px;
+.card-personaje-simple-contenedor .personaje-nombre-contenedor {
+  padding: 16px 24px 17px 20px;
+  background-color: #151515;
+  width: 210px;
+  color: white;
+  transition: 0.2s;
 }
-.comic-contenido-contenedor h1, .comic-contenido-contenedor h3, .comic-contenido-contenedor p {
-  margin: 20px;
-}
-
-.comics-contenedor h3, .comics-contenedor h4 {
-  margin: 20px 0px;
+.card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+  height: 79px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 .loader-contenedor {
@@ -245,7 +223,7 @@ button i {
     transform: rotate(360deg);
   }
 }
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -260,14 +238,14 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -299,7 +277,7 @@ header {
   width: 100%;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -314,14 +292,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -337,7 +315,7 @@ header {
   font-family: "Roboto", sans-serif;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -352,14 +330,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -395,7 +373,7 @@ header {
   padding-right: 10px;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -410,20 +388,20 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor, .formulario {
+.resultados-cards-contenedor, .personajes-cards-contenedor, .formulario {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.card-comic-basica:hover {
+.card-comic-basica:hover, .card-personaje-simple-contenedor:hover {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -441,7 +419,7 @@ header {
   transition: 0.3s;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -456,14 +434,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -496,7 +474,7 @@ header {
   background-color: #ed1d23;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-basica, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -511,14 +489,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-comic-basica, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
