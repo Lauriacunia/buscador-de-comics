@@ -46,3 +46,35 @@
     }
 
 }
+
+// TARJETA DETALLE
+.card-personaje-detalle-contenedor {
+    font-family: $tipografia-principal;
+    display:flex;
+    .personaje-img-contenedor {
+        max-width: 350px;
+        margin-right: 50px;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+
+.personaje-contenido-contenedor {
+    margin-left: 20px;
+
+    h1, h3, p {
+        margin: 20px;
+    } 
+}
+
+.comics-contenedor {
+    h3, h4 {
+       margin: 20px 0px; 
+    }    
+}
+
+.comics-cards-contenedor{
+    @extend %in-grid;
+}

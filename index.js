@@ -1,8 +1,8 @@
 const $ = (selector) => document.querySelector(selector)
 const $$ = (selector) => document.querySelectorAll(selector)
 
-let comics = [];  // guarda la data de comics traida de la api
-let personajes = []; // guarda la data de personajes traida de la api
+let comics = [];
+let personajes = [];
 
 const API_KEY = 'b1ee9360739b9c7554ec7be096d4d06f'
 const BASE_URL = 'https://gateway.marvel.com/v1/public'
@@ -19,27 +19,23 @@ const contenedorDeCards = $(".resultados-cards-contenedor");
 const loader = $(".loader-contenedor");
 
 
-
 /**  RUTAS */
+
 const getComics = `${BASE_URL}/comics?apikey=${API_KEY}`;
 const getPersonajes = `${BASE_URL}/characters?apikey=${API_KEY}`;
 
 
-
 /**  FUNCIONES GENERALES  */
 
-// construirURL: junta dos strings, una ruta base mas sus parametros de busqueda y los devuelve
 const construirURL = (endpoint, queryParams) => {
   return `${endpoint}${queryParams}`
 }
 
-//actualizarQueryparamas: recibe un parametro de busqueda y lo une al parametro offset que va siempre
 const actualizarQueryParams = (query) => {
   let queryParams = `&offset=${offset}`;
   queryParams += query;
   return queryParams
 }
-
 
 const borrarContenidoHTML = (elemento) => {
   elemento.innerHTML = ``;
@@ -65,7 +61,6 @@ const resetearValoresDeBusqueda = () => {
 
 /**  FUNCIONES PRINCIPALES  */ 
 
-//crearTarjetasDeComics : dibuja las cards de comisc en HTML a partir de la data que recibe como parametro
 
 const crearTarjetasDeComics = (data) => {
   console.log("Listando tarjetas de comics...")
@@ -95,42 +90,24 @@ const crearTarjetasDeComics = (data) => {
         `;
   });
 }
-
-const buscarPersonaje = (url) => {
-  let personaje = {};
-
-  fetch(`${url}?apikey=${API_KEY}`)
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      console.log(data)
-      personaje = data;
-      console.log(personaje)
-    })
-  // falta resolver bug de como retornar esto luego del fetch
-  return personaje
-}
-
-const buscarImagenDePersonaje = (url) => {
-  console.log(url);
-  const personaje = buscarPersonaje(url);
-  imgPersonaje = `${personaje.data.results.thumbnail.path}.${personaje.data.results.thumbnail.extension}`;
-  console.log(imgPersonaje)
-  return imgPersonaje
-}
-
-
-// crearTarjetaDEtalleDelComic: dibuja en HTML la tarejta detalle de comic a partir de la data de la tarjeta Clickeada
-//                               que recibe como parametro.
+                              
 const crearTarjetaDetalleDeComic = (comicCardElegida) => {
+
+  console.log("Creando tarjeta detalle de comic:")
+  console.log(comicCardElegida)
+
+  let imgComic = comicCardElegida.thumbnail.path;
+   
+  if(imgComic === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+    imgComic = "/images/img-not-found"
+  }
 
   contenedorDeCards.innerHTML = `
  
              <div class= "card-detalle-contenedor">
                <div class= "card-comic-detalle-contenedor">
                    <div class= "comic-img-contenedor">
-                       <img class= "comic-img" src="${comicCardElegida.thumbnail.path}.jpg">
+                       <img class= "comic-img" src="${imgComic}.${comicCardElegida.thumbnail.extension}">
                    </div>
                    <div class= "comic-contenido-contenedor">
                        <h1 class= "comic-contenido-titulo">${comicCardElegida.title}</h2>
@@ -200,6 +177,7 @@ const crearTarjetasDePersonajes = (data) => {
     console.log(personaje)
     resultadosTitulo.classList.toggle("is-hidden");
     cantidadDeResultados.textContent = ` ${data.data.total}`;
+    
     let imgPersonaje = personaje.thumbnail.path;
 
     if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
@@ -224,8 +202,40 @@ const crearTarjetasDePersonajes = (data) => {
 
 }
 
-// listarCards: rellena el  <div class="resultados-cards-contenedor"></div> en el HTML con 
-//              tarjetas basicas de comics o personajes
+const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
+  console.log("Creando tarjeta detalle de personaje...")
+  console.log(personajeCardElegida)
+
+  let imgPersonaje = personajeCardElegida.thumbnail.path;
+
+    if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+      imgPersonaje = "/images/img-not-found"
+    }
+
+  contenedorDeCards.innerHTML = `
+      <div class="card-detalle-contenedor">
+        <div class="card-personaje-detalle-contenedor">
+            <div class="personaje-img-contenedor">
+                <img class="personaje-img" src="${imgPersonaje}.${personajeCardElegida.thumbnail.extension}">
+            </div>
+            <div class="personaje-contenido-contenedor">
+              <h1 class="personaje-contenido-nombre">${personajeCardElegida.name}</h2>
+              <h3>Descripción:</h3>
+              <p>${personajeCardElegida.description}</p>
+            </div>
+        </div>
+
+        <div class="comics-contenedor">
+            <h3>Comics</h3>
+            <h4><span class="cantidad-comics">${personajeCardElegida.series.available}</span> ENCONTRADOS</h4>
+            <div class="comics-cards-contenedor"></div>
+        </div>
+      </div>
+  `
+
+  // rellenar tarjetas de comics en los que aparece este personaje
+}
+
 
 const listarCards = (url) => {
   console.log("Listando cards...")
@@ -245,7 +255,6 @@ const listarCards = (url) => {
 
       if(tipo === "comics") {
         crearTarjetasDeComics(data)
-
       }else {
         crearTarjetasDePersonajes(data)
       } 
@@ -253,31 +262,38 @@ const listarCards = (url) => {
       
       // ABRIR CARD DETALLE DE COMIC CON ONCLICK
 
-      const todasLasCardsDeComics = $$(".card-comic-basica")
+      const todasLasCardsDeComics = $$(".card-comic-simple-contenedor")
 
       todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
-        comicCard.onclick = () => {
+          comicCard.onclick = () => {
+              const comicCardElegida = comics[cardIndice]
 
-          const comicCardElegida = comics[cardIndice]
+              borrarContenidoHTML(contenedorDeCards);
+              ocultar(resultadosTitulo);
+              ocultar(cantidadDeResultados);
 
-          borrarContenidoHTML(contenedorDeCards);
-          ocultar(resultadosTitulo);
-          ocultar(cantidadDeResultados);
+              crearTarjetaDetalleDeComic(comicCardElegida);
 
-          crearTarjetaDetalleDeComic(comicCardElegida);
-
-        }; // cierra el onclick
+          }; // cierra el onclick
       }); // cierra el foreach
 
 
        // ABRIR CARD DETALLE DE PERSONAJE CON ONCLICK
-       // LOGICA DE ANGIE
-       // guiate por el codigo de la linea 214 a 225
-       // crea una funcion aparte que se llame parecido a crearTarjetaDetalleDePersonaje() donde metas el maquetado
+      
+       const todasLasCardsDePersonajes = $$(".card-personaje-simple-contenedor")
 
+       todasLasCardsDePersonajes.forEach((personajeCard, personajeIndice) => {
+            personajeCard.onclick = () => {
+                const personajeCardElegida = personajes[personajeIndice]
 
+                borrarContenidoHTML(contenedorDeCards);
+                ocultar(resultadosTitulo);
+                ocultar(cantidadDeResultados);
 
+                crearTarjetaDetalleDePersonaje(personajeCardElegida);
 
+          }; // cierra el onclick
+       }); // cierra el foreach
 
 
     }) // cierra el then
@@ -427,32 +443,4 @@ inicializar();
 
 
 
-
-//  MAQUETADO DETALLE PERSONAJE
-
-// <div class="card-detalle-contenedor">
-// <div class="card-personaje-detalle-contenedor">
-//     <div class="personaje-img-contenedor">
-//         <img class="personaje-img" src="http://i.annihil.us/u/prod/marvel/i/mg/6/00/6026d944c0e3a.jpg">
-//     </div>
-//     <div class="comic-contenido-contenedor">
-//         <h1 class="comic-contenido-titulo">Slick</h2>
-//             <h3>Publicado:</h3>
-//             <p>22/22/2222</p>
-//             <h3>Guionistas:</h3>
-//             <p class="guionistas-nombres">Coco cocote</p>
-
-//             <h3>Descripción: </h3>
-//             <p>Hola pepo, soy la descripción</p>
-//     </div>
-// </div>
-// <div class="comics-contenedor">
-//     <h3>Comics</h3>
-//     <h4><span class="cantidad-comics">3</span> ENCONTRADOS
-//     </h4>
-//     <div class="comics-cards-contenedor">
-
-//     </div>
-// </div>
-// </div>
 

@@ -40,16 +40,22 @@
 
 
 
-
+//TARJETA DETALLE
 
 
 .card-detalle-contenedor {
     font-family: $tipografia-principal;
 }
+
+
 .card-comic-detalle-contenedor {
     display:flex;
     .comic-img-contenedor {
-        margin-right: 20px;
+        max-width: 350px;
+        margin-right: 50px;
+        img {
+            width: 100%;
+        }
     }
 }
 
@@ -58,17 +64,16 @@
 
     h1, h3, p {
         margin: 20px;
-    }
-   
-}
-
-.personajes-cards-contenedor{
-       @extend %in-grid;
+    } 
 }
 
 .personajes-contenedor {
     h3, h4 {
        margin: 20px 0px; 
-    }
-    
+    }    
 }
+.personajes-cards-contenedor{
+       @extend %in-grid;
+}
+
+
