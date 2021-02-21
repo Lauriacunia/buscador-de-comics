@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
-.card-comic-basica:hover {
+.card-personaje-simple-contenedor:hover, .card-comic-simple-contenedor:hover {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -42,7 +42,7 @@ button i {
   background-color: #0085ca;
 }
 
-.card-personaje-simple, .card-comic-basica {
+.card-personaje-simple-contenedor, .card-comic-simple-contenedor {
   cursor: pointer;
 }
 
@@ -57,59 +57,46 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.resultados-cards-contenedor {
-  margin: 100px;
-}
-
-.card-comic-positionator {
-  margin: 20px;
-}
-.card-comic-positionator .card-comic-basica {
-  height: 350px;
-  width: 210px;
-}
-.card-comic-positionator .card-comic-basica .comic-img-contenedor {
-  display: flex;
-  justify-content: center;
-}
-.card-comic-positionator .card-comic-basica .comic-img-contenedor img {
-  height: 350px;
-  width: 210px;
-}
-.card-comic-positionator .comic-titulo-contenedor {
-  width: 210px;
-}
-.card-comic-positionator .comic-titulo-contenedor h3 {
-  font-family: "Roboto", sans-serif;
-  text-align: center;
-}
-
-.card-personaje-detalle-contenedor .personaje-img-contenedor, .card-comic-detalle-contenedor .comic-img-contenedor, .card-comic-basica .comic-img-contenedor {
-  max-width: 230px;
+.card-comic-simple-contenedor {
+  margin: 0 5px 30px;
+  box-shadow: 10px 5px 5px #bdb9b9;
   height: auto;
+  width: calc(100% / 5 - 2 * 10px);
+  position: relative;
+  /*Male: elegi mover toda la tarjeta 
+  y no solo la img como en el proyecto de ADA
+  porque me gusta mas como queda */
 }
-.card-personaje-detalle-contenedor .personaje-img-contenedor img, .card-comic-detalle-contenedor .comic-img-contenedor img, .card-comic-basica .comic-img-contenedor img {
+.card-comic-simple-contenedor:hover .comic-titulo {
+  color: #ed1d23;
+}
+.card-comic-simple-contenedor .comic-img-contenedor {
+  flex-grow: 1;
+  overflow: hidden;
+}
+.card-comic-simple-contenedor .comic-img-contenedor img {
+  height: 100%;
   width: 100%;
 }
-
-.card-comic-basica {
-  margin: 0 10px 40px;
-  box-shadow: 10px 5px 5px #bdb9b9;
+.card-comic-simple-contenedor .comic-titulo-contenedor {
+  height: 64px;
+  margin-top: 25px;
+  font-family: "Roboto", sans-serif;
 }
-.comic-titulo {
+.card-comic-simple-contenedor .comic-titulo-contenedor .comic-titulo {
   font-size: 14px;
   margin: 5px;
 }
@@ -136,37 +123,7 @@ button i {
   margin: 20px 0px;
 }
 
-.personaje-nombre-contenedor {
-  padding: 16px 24px 17px 20px;
-  background-color: #151515;
-  color: white;
-  transition: 0.2s;
-}
-.personaje-nombre-contenedor .personaje-nombre {
-  height: 79px;
-}
-
-.personaje-img-contenedor {
-  flex-grow: 1;
-  border-bottom: 4px solid #ed1d23;
-  overflow: hidden;
-}
-.personaje-img-contenedor img {
-  width: 100%;
-}
-
-.card-personaje-simple {
-  width: calc(100% / 6 - 2 * 10px);
-  position: relative;
-}
-.card-personaje-simple:hover img {
-  transform: scale(1.3);
-}
-.card-personaje-simple:hover .personaje-nombre-contenedor {
-  background-color: #ed1d23;
-}
-
-.card-comic-basica, .card-personaje-simple {
+.card-personaje-simple-contenedor, .card-comic-simple-contenedor {
   cursor: pointer;
 }
 
@@ -181,44 +138,52 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.card-personaje-detalle-contenedor {
-  display: flex;
+.card-personaje-simple-contenedor {
+  margin: 0 10px 40px;
+  box-shadow: 10px 5px 5px #bdb9b9;
+  height: 350px;
+  width: 210px;
+  position: relative;
 }
-.card-personaje-detalle-contenedor .personaje-img-contenedor {
-  margin-right: 20px;
+.card-personaje-simple-contenedor:hover img {
+  transform: scale(1.3);
 }
-
-.personaje-img-contenedor {
+.card-personaje-simple-contenedor:hover .personaje-nombre-contenedor {
+  background-color: #ed1d23;
+}
+.card-personaje-simple-contenedor .personaje-img-contenedor {
   flex-grow: 1;
   border-bottom: 4px solid #ed1d23;
   overflow: hidden;
 }
-.personaje-img-contenedor img {
+.card-personaje-simple-contenedor .personaje-img-contenedor img {
   width: 100%;
+  height: 100%;
 }
-
-.comic-contenido-contenedor {
-  margin-left: 20px;
+.card-personaje-simple-contenedor .personaje-nombre-contenedor {
+  padding: 16px 24px 17px 20px;
+  background-color: #151515;
+  width: 210px;
+  color: white;
+  transition: 0.2s;
 }
-.comic-contenido-contenedor h1, .comic-contenido-contenedor h3, .comic-contenido-contenedor p {
-  margin: 20px;
-}
-
-.comics-contenedor h3, .comics-contenedor h4 {
-  margin: 20px 0px;
+.card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+  height: 79px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 .loader-contenedor {
@@ -245,7 +210,7 @@ button i {
     transform: rotate(360deg);
   }
 }
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -260,14 +225,14 @@ button i {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -299,7 +264,7 @@ header {
   width: 100%;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -314,14 +279,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -337,7 +302,7 @@ header {
   font-family: "Roboto", sans-serif;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -352,14 +317,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -395,7 +360,7 @@ header {
   padding-right: 10px;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -410,20 +375,20 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor, .formulario {
+.resultados-cards-contenedor, .personajes-cards-contenedor, .formulario {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.card-comic-basica:hover {
+.card-comic-simple-contenedor:hover, .card-personaje-simple-contenedor:hover {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -431,7 +396,11 @@ header {
 
 .seccion-principal {
   font-family: "Roboto", sans-serif;
-  margin: 40px 10px;
+  margin: 50px 60px;
+}
+
+.resultados-cards-contenedor {
+  justify-content: flex-start;
 }
 
 .card {
@@ -441,7 +410,7 @@ header {
   transition: 0.3s;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -456,14 +425,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -496,7 +465,7 @@ header {
   background-color: #ed1d23;
 }
 
-.card-comic-basica, .card-personaje-simple {
+.card-comic-simple-contenedor, .card-personaje-simple-contenedor {
   cursor: pointer;
 }
 
@@ -511,14 +480,14 @@ header {
   align-items: center;
 }
 
-.navbar, .card-comic-basica {
+.navbar, .card-personaje-simple-contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
