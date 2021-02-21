@@ -53,7 +53,15 @@ const mostrar = (elemento) => {
   elemento.classList.remove("is-hidden")
 }
 
+const resetearValoresDeBusqueda = () => {
+  const busqueda = $("#input-search");
+  busqueda.value = ``;
+  const tipo = $("#tipo");
+  tipo.value = "comics";
+  const orden = $("#orden");
+  orden.value = "a-z";
 
+}
 
 /**  FUNCIONES PRINCIPALES  */ 
 
@@ -68,11 +76,16 @@ const crearTarjetasDeComics = (data) => {
   comics.map((comic) => {
     resultadosTitulo.classList.toggle("is-hidden");
     cantidadDeResultados.textContent = ` ${data.data.total}`;
+    let imgComic = comic.thumbnail.path;
+   
+    if(imgComic === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+      imgComic = "/images/img-not-found"
+    }
 
     contenedorDeCards.innerHTML += `
     <article class="card-comic-simple-contenedor">        
       <div class="comic-img-contenedor ">              
-        <img src="${comic.thumbnail.path}.jpg" />        
+        <img src="${imgComic}.${comic.thumbnail.extension}" />        
       </div>     
       <div class="comic-titulo-contenedor">
          <h3 class="comic-titulo">${comic.title}</h3>
@@ -181,17 +194,23 @@ const crearTarjetasDePersonajes = (data) => {
   personajes = data.data.results
   console.log(personajes)
 
+  
   personajes.map((personaje) => {
     console.log("dentro del map de personajes")
     console.log(personaje)
     resultadosTitulo.classList.toggle("is-hidden");
     cantidadDeResultados.textContent = ` ${data.data.total}`;
+    let imgPersonaje = personaje.thumbnail.path;
+
+    if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+      imgPersonaje = "/images/img-not-found"
+    }
 
     contenedorDeCards.innerHTML += `
     
     <article class= "card-personaje-simple-contenedor">
         <div class="personaje-img-contenedor">              
-            <img src="${personaje.thumbnail.path}.${personaje.thumbnail.extension}"/>        
+            <img src="${imgPersonaje}.${personaje.thumbnail.extension}"/>        
         </div>   
         <div class="personaje-nombre-contenedor">
             <h3 class="personaje-nombre">${personaje.name}</h3>
@@ -375,6 +394,7 @@ const botonInicio = $(".boton-inicio");
 const botonVolver = $(".boton-volver");
 
 botonInicio.onclick = () => {
+  resetearValoresDeBusqueda();
   console.log("clickeaste home")
   inicializar();
 }
