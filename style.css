@@ -76,7 +76,7 @@ button i, .boton-inicio i, .boton-volver i {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -113,7 +113,11 @@ button i, .boton-inicio i, .boton-volver i {
   display: flex;
 }
 .card-comic-detalle-contenedor .comic-img-contenedor {
-  margin-right: 20px;
+  max-width: 350px;
+  margin-right: 50px;
+}
+.card-comic-detalle-contenedor .comic-img-contenedor img {
+  width: 100%;
 }
 
 .comic-contenido-contenedor {
@@ -149,7 +153,7 @@ button i, .boton-inicio i, .boton-volver i {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .comics-cards-contenedor, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -188,6 +192,29 @@ button i, .boton-inicio i, .boton-volver i {
   height: 79px;
   font-family: "Roboto", sans-serif;
   text-align: center;
+}
+
+.card-personaje-detalle-contenedor {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+}
+.card-personaje-detalle-contenedor .personaje-img-contenedor {
+  max-width: 350px;
+  margin-right: 50px;
+}
+.card-personaje-detalle-contenedor .personaje-img-contenedor img {
+  width: 100%;
+}
+
+.personaje-contenido-contenedor {
+  margin-left: 20px;
+}
+.personaje-contenido-contenedor h1, .personaje-contenido-contenedor h3, .personaje-contenido-contenedor p {
+  margin: 20px;
+}
+
+.comics-contenedor h3, .comics-contenedor h4 {
+  margin: 20px 0px;
 }
 
 .loader-contenedor {
@@ -236,7 +263,7 @@ button i, .boton-inicio i, .boton-volver i {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -290,7 +317,7 @@ header {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -328,7 +355,7 @@ header {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor {
+.resultados-cards-contenedor, .formulario, .personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -397,7 +424,7 @@ header {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .formulario {
+.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor, .formulario {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -459,7 +486,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -514,7 +541,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .formulario, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor, .formulario, .resultados-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;

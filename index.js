@@ -96,12 +96,18 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
   console.log("Creando tarjeta detalle de comic:")
   console.log(comicCardElegida)
 
+  let imgComic = comicCardElegida.thumbnail.path;
+   
+  if(imgComic === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+    imgComic = "/images/img-not-found"
+  }
+
   contenedorDeCards.innerHTML = `
  
              <div class= "card-detalle-contenedor">
                <div class= "card-comic-detalle-contenedor">
                    <div class= "comic-img-contenedor">
-                       <img class= "comic-img" src="${comicCardElegida.thumbnail.path}.jpg">
+                       <img class= "comic-img" src="${imgComic}.${comicCardElegida.thumbnail.extension}">
                    </div>
                    <div class= "comic-contenido-contenedor">
                        <h1 class= "comic-contenido-titulo">${comicCardElegida.title}</h2>
@@ -171,6 +177,7 @@ const crearTarjetasDePersonajes = (data) => {
     console.log(personaje)
     resultadosTitulo.classList.toggle("is-hidden");
     cantidadDeResultados.textContent = ` ${data.data.total}`;
+    
     let imgPersonaje = personaje.thumbnail.path;
 
     if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
@@ -199,6 +206,34 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   console.log("Creando tarjeta detalle de personaje...")
   console.log(personajeCardElegida)
 
+  let imgPersonaje = personajeCardElegida.thumbnail.path;
+
+    if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+      imgPersonaje = "/images/img-not-found"
+    }
+
+  contenedorDeCards.innerHTML = `
+      <div class="card-detalle-contenedor">
+        <div class="card-personaje-detalle-contenedor">
+            <div class="personaje-img-contenedor">
+                <img class="personaje-img" src="${imgPersonaje}.${personajeCardElegida.thumbnail.extension}">
+            </div>
+            <div class="personaje-contenido-contenedor">
+              <h1 class="personaje-contenido-nombre">${personajeCardElegida.name}</h2>
+              <h3>Descripción:</h3>
+              <p>${personajeCardElegida.description}</p>
+            </div>
+        </div>
+
+        <div class="comics-contenedor">
+            <h3>Comics</h3>
+            <h4><span class="cantidad-comics">${personajeCardElegida.series.available}</span> ENCONTRADOS</h4>
+            <div class="comics-cards-contenedor"></div>
+        </div>
+      </div>
+  `
+
+  // rellenar tarjetas de comics en los que aparece este personaje
 }
 
 
@@ -258,10 +293,7 @@ const listarCards = (url) => {
                 crearTarjetaDetalleDePersonaje(personajeCardElegida);
 
           }; // cierra el onclick
-       }); // cierra el foreac
-
-
-
+       }); // cierra el foreach
 
 
     }) // cierra el then
@@ -411,32 +443,4 @@ inicializar();
 
 
 
-
-//  MAQUETADO DETALLE PERSONAJE
-
-// <div class="card-detalle-contenedor">
-// <div class="card-personaje-detalle-contenedor">
-//     <div class="personaje-img-contenedor">
-//         <img class="personaje-img" src="http://i.annihil.us/u/prod/marvel/i/mg/6/00/6026d944c0e3a.jpg">
-//     </div>
-//     <div class="comic-contenido-contenedor">
-//         <h1 class="comic-contenido-titulo">Slick</h2>
-//             <h3>Publicado:</h3>
-//             <p>22/22/2222</p>
-//             <h3>Guionistas:</h3>
-//             <p class="guionistas-nombres">Coco cocote</p>
-
-//             <h3>Descripción: </h3>
-//             <p>Hola pepo, soy la descripción</p>
-//     </div>
-// </div>
-// <div class="comics-contenedor">
-//     <h3>Comics</h3>
-//     <h4><span class="cantidad-comics">3</span> ENCONTRADOS
-//     </h4>
-//     <div class="comics-cards-contenedor">
-
-//     </div>
-// </div>
-// </div>
 
