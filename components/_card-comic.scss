@@ -4,24 +4,26 @@
 
 
 .card-comic-simple-contenedor {
+    @extend %is-stack !optional;
     @extend %is-clickeable !optional;
-    margin: 0 5px 30px;
-    box-shadow: 10px 5px 5px rgb(189, 185, 185);
-    height: auto;
     width: calc(100% / 5 - 2 * 10px);;
-    position:relative;
+    margin: 0 10px 40px;
+    
     &:hover {
-        @extend %move-up;
+        .comic-img-contenedor{
+           @extend %move-up;  
+        } 
         .comic-titulo {
             color: #ed1d23;
           }   
     }
-    /*Male: elegi mover toda la tarjeta 
-    y no solo la img como en el proyecto de ADA
-    porque me gusta mas como queda */
+   
     .comic-img-contenedor {
-        flex-grow: 1;
+        display:flex;
+        position: relative;
+        box-shadow: 0 26px 24px -16px rgb(0 0 0 / 40%);
         overflow: hidden;
+        margin-bottom: 20px;
         img {
             height: 100%;
             width: 100%;
@@ -34,7 +36,6 @@
         font-family: $tipografia-principal;
         .comic-titulo {
           font-size: 14px;
-          margin: 5px;  
         }       
       }
 

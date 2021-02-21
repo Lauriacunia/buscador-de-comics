@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
-.card-personaje-simple-contenedor:hover, .card-comic-simple-contenedor:hover {
+.card-personaje-simple-contenedor:hover, .card-comic-simple-contenedor:hover .comic-img-contenedor {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -71,21 +71,18 @@ button i {
 }
 
 .card-comic-simple-contenedor {
-  margin: 0 5px 30px;
-  box-shadow: 10px 5px 5px #bdb9b9;
-  height: auto;
   width: calc(100% / 5 - 2 * 10px);
-  position: relative;
-  /*Male: elegi mover toda la tarjeta 
-  y no solo la img como en el proyecto de ADA
-  porque me gusta mas como queda */
+  margin: 0 10px 40px;
 }
 .card-comic-simple-contenedor:hover .comic-titulo {
   color: #ed1d23;
 }
 .card-comic-simple-contenedor .comic-img-contenedor {
-  flex-grow: 1;
+  display: flex;
+  position: relative;
+  box-shadow: 0 26px 24px -16px rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  margin-bottom: 20px;
 }
 .card-comic-simple-contenedor .comic-img-contenedor img {
   height: 100%;
@@ -98,7 +95,6 @@ button i {
 }
 .card-comic-simple-contenedor .comic-titulo-contenedor .comic-titulo {
   font-size: 14px;
-  margin: 5px;
 }
 
 .card-detalle-contenedor {
@@ -388,7 +384,7 @@ header {
   align-items: center;
 }
 
-.card-comic-simple-contenedor:hover, .card-personaje-simple-contenedor:hover {
+.card-comic-simple-contenedor:hover .comic-img-contenedor, .card-personaje-simple-contenedor:hover {
   position: relative;
   transform: translateY(-10px);
   transition: 0.2s;
@@ -400,7 +396,7 @@ header {
 }
 
 .resultados-cards-contenedor {
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 
 .card {
