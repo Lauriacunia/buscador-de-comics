@@ -76,4 +76,13 @@
        @extend %in-grid;
 }
 
+.comics-cards-contenedor {
+    @extend %is-stack !optional;
+    article {
+        margin-right: 20px;
+        .comic-img-contenedor {
+            height: 300px;
+        }
+    }
 
+}

@@ -131,6 +131,13 @@ button i, .boton-inicio i, .boton-volver i {
   margin: 20px 0px;
 }
 
+.comics-cards-contenedor article {
+  margin-right: 20px;
+}
+.comics-cards-contenedor article .comic-img-contenedor {
+  height: 300px;
+}
+
 .card-personaje-simple-contenedor, .card-comic-simple-contenedor {
   cursor: pointer;
 }
