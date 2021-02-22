@@ -152,6 +152,8 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
       console.log(data)   
       const personajesContenedor = $(".personajes-cards-contenedor")
       crearTarjetasDePersonajes(data, personajesContenedor)
+      ocultar(resultadosTitulo);
+      ocultar(cantidadDeResultados);
     }) 
 }
 
@@ -237,6 +239,8 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
       console.log(data)   
       const comicsContenedor = $(".comics-cards-contenedor")
       crearTarjetasDeComics(data, comicsContenedor)
+      ocultar(resultadosTitulo);
+      ocultar(cantidadDeResultados);
     }) 
 
 
