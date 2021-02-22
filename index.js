@@ -70,6 +70,8 @@ const buscarComicPorId = (id) => {
     console.log(data)
     comicEncontrado = data.data.results[0];
     console.log(comicEncontrado)
+
+    crearTarjetaDetalleDeComic(comicEncontrado); 
     
    })
    .catch((err) => {
@@ -119,20 +121,15 @@ const crearTarjetasDeComics = (data, container) => {
   todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
       comicCard.onclick = () => {
 
-        let comicCardElegida = comics[cardIndice];
-         // let comicCardElegidaId = comics[cardIndice].id
-         // console.log(comicCardElegidaId)
-         // buscarComicPorId(comicCardElegidaId)
-
-         // let comicCardElegida = comicEncontrado
-         // console.log(comicCardElegida)
-
+        //let comicCardElegida = comics[cardIndice];
+         let comicCardElegidaId = comics[cardIndice].id
+         console.log(comicCardElegidaId)
+      
           borrarContenidoHTML(contenedorDeCards);
           ocultar(resultadosTitulo);
           ocultar(cantidadDeResultados);
 
-        //  crearTarjetaDetalleDeComic(comicCardElegida);     
-        crearTarjetaDetalleDeComic(comicCardElegida);    
+          buscarComicPorId(comicCardElegidaId)          
 
       }; // cierra el onclick
   }); // cierra el foreach
@@ -318,6 +315,7 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
 
 const listarCards = (url) => {
   console.log("Listando cards...")
+  console.log(url)
 
   borrarContenidoHTML(contenedorDeCards);
   mostrar(resultadosTitulo);
@@ -410,20 +408,21 @@ const actualizarBusqueda = () => {
 
   } else {
     console.log("buscaste personajes")
-    console.log(`Titulo: ${busqueda}`)
+    console.log(`Nombre: ${busqueda}`)
     console.log(`Tipo: ${tipo}`)
     console.log(`Orden: ${orden}`)
 
     if (busqueda.length) {
-      queryParams = actualizarQueryParams(`&nameStartWith=${busqueda.value}`)
+      busquedaValue = `&nameStartsWith=${busqueda}`
     }
-    if (orden.value === 'a-z') {
+    if (orden === 'a-z') {
       queryParams = actualizarQueryParams(`${busquedaValue}&orderBy=name`)
     }
-    if (orden.value === 'z-a') {
+    if (orden === 'z-a') {
       queryParams = actualizarQueryParams(`${busquedaValue}&orderBy=-name`)
     }
-
+    console.log(queryParams)
+    console.log(busquedaValue)
     listarCards(construirURL(getPersonajes, queryParams))
   }
 
