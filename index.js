@@ -227,6 +227,19 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   `
 
   // rellenar tarjetas de comics en los que aparece este personaje
+  const urlComicsDelPersonaje = personajeCardElegida.series.collectionURI
+
+  fetch(`${urlComicsDelPersonaje}?apikey=${API_KEY}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      console.log(data)   
+      const comicsContenedor = $(".comics-cards-contenedor")
+      crearTarjetasDeComics(data, comicsContenedor)
+    }) 
+
+
 }
 
 
