@@ -1,8 +1,6 @@
 const $ = (selector) => document.querySelector(selector)
 const $$ = (selector) => document.querySelectorAll(selector)
 
-let comics = [];
-let personajes = [];
 
 const API_KEY = 'b1ee9360739b9c7554ec7be096d4d06f'
 const BASE_URL = 'https://gateway.marvel.com/v1/public'
@@ -10,6 +8,7 @@ const BASE_URL = 'https://gateway.marvel.com/v1/public'
 let offset = 0
 let paginaActual = 0
 let ultimaBusqueda = ""
+let comicEncontrado = {}
 
 const formulario = $(".formulario")
 const seccionPrincipal = $(".seccion-principal");
@@ -59,6 +58,27 @@ const resetearValoresDeBusqueda = () => {
 
 }
 
+const buscarComicPorId = (id) => {
+  console.log("Buscando comic por id...")
+  console.log(id)
+  
+   fetch(`${BASE_URL}/comics/${id}?apikey=${API_KEY}`)
+   .then((res) => {
+     return res.json()
+   })
+   .then((data) => {  
+    console.log(data)
+    comicEncontrado = data.data.results[0];
+    console.log(comicEncontrado)
+    
+   })
+   .catch((err) => {
+    console.log(err)
+    seccionPrincipal.textContent = "No pudimos encontrar tu busqueda"
+  })
+
+}
+
 /**  FUNCIONES PRINCIPALES  */ 
 
 
@@ -66,7 +86,8 @@ const crearTarjetasDeComics = (data, container) => {
   console.log("Listando tarjetas de comics...")
 
   ocultar(loader)
-  comics = data.data.results
+  let comics = data.data.results
+  console.log(comics)
 
   comics.map((comic) => {
     resultadosTitulo.classList.toggle("is-hidden");
@@ -89,6 +110,33 @@ const crearTarjetasDeComics = (data, container) => {
              
         `;
   });
+
+
+  // ABRIR CARD DETALLE DE COMIC CON ONCLICK
+
+  const todasLasCardsDeComics = $$(".card-comic-simple-contenedor")
+
+  todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
+      comicCard.onclick = () => {
+
+        let comicCardElegida = comics[cardIndice];
+         // let comicCardElegidaId = comics[cardIndice].id
+         // console.log(comicCardElegidaId)
+         // buscarComicPorId(comicCardElegidaId)
+
+         // let comicCardElegida = comicEncontrado
+         // console.log(comicCardElegida)
+
+          borrarContenidoHTML(contenedorDeCards);
+          ocultar(resultadosTitulo);
+          ocultar(cantidadDeResultados);
+
+        //  crearTarjetaDetalleDeComic(comicCardElegida);     
+        crearTarjetaDetalleDeComic(comicCardElegida);    
+
+      }; // cierra el onclick
+  }); // cierra el foreach
+
 }
                               
 const crearTarjetaDetalleDeComic = (comicCardElegida) => {
@@ -152,7 +200,14 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
       console.log(data)   
       const personajesContenedor = $(".personajes-cards-contenedor")
       crearTarjetasDePersonajes(data, personajesContenedor)
+      ocultar(resultadosTitulo);
+      ocultar(cantidadDeResultados);
     }) 
+    .catch((err) => {
+      console.log(err)
+      seccionPrincipal.textContent = "No pudimos encontrar tu busqueda"
+    })
+
 }
 
 
@@ -161,7 +216,7 @@ const crearTarjetasDePersonajes = (data, container) => {
   console.log("Creando tarjetas de personajes...")
 
   ocultar(loader)
-  personajes = data.data.results
+  let personajes = data.data.results
   console.log(personajes)
 
   
@@ -191,7 +246,23 @@ const crearTarjetasDePersonajes = (data, container) => {
         `;
   });
 
+    
+    // ABRIR CARD DETALLE DE PERSONAJE CON ONCLICK
   
+  const todasLasCardsDePersonajes = $$(".card-personaje-simple-contenedor")
+
+  todasLasCardsDePersonajes.forEach((personajeCard, personajeIndice) => {
+      personajeCard.onclick = () => {
+          const personajeCardElegida = personajes[personajeIndice]
+
+          borrarContenidoHTML(contenedorDeCards);
+          ocultar(resultadosTitulo);
+          ocultar(cantidadDeResultados);
+
+          crearTarjetaDetalleDePersonaje(personajeCardElegida);
+
+    }; // cierra el onclick
+  }); // cierra el foreach
 
 }
 
@@ -237,6 +308,8 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
       console.log(data)   
       const comicsContenedor = $(".comics-cards-contenedor")
       crearTarjetasDeComics(data, comicsContenedor)
+      ocultar(resultadosTitulo);
+      ocultar(cantidadDeResultados);
     }) 
 
 
@@ -264,43 +337,6 @@ const listarCards = (url) => {
       }else {
         crearTarjetasDePersonajes(data, contenedorDeCards)
       } 
-
-      
-      // ABRIR CARD DETALLE DE COMIC CON ONCLICK
-
-      const todasLasCardsDeComics = $$(".card-comic-simple-contenedor")
-
-      todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
-          comicCard.onclick = () => {
-              const comicCardElegida = comics[cardIndice]
-
-              borrarContenidoHTML(contenedorDeCards);
-              ocultar(resultadosTitulo);
-              ocultar(cantidadDeResultados);
-
-              crearTarjetaDetalleDeComic(comicCardElegida);
-
-          }; // cierra el onclick
-      }); // cierra el foreach
-
-
-       // ABRIR CARD DETALLE DE PERSONAJE CON ONCLICK
-      
-       const todasLasCardsDePersonajes = $$(".card-personaje-simple-contenedor")
-
-       todasLasCardsDePersonajes.forEach((personajeCard, personajeIndice) => {
-            personajeCard.onclick = () => {
-                const personajeCardElegida = personajes[personajeIndice]
-
-                borrarContenidoHTML(contenedorDeCards);
-                ocultar(resultadosTitulo);
-                ocultar(cantidadDeResultados);
-
-                crearTarjetaDetalleDePersonaje(personajeCardElegida);
-
-          }; // cierra el onclick
-       }); // cierra el foreach
-
 
     }) // cierra el then
     .catch((err) => {
