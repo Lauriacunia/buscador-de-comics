@@ -62,7 +62,7 @@ const resetearValoresDeBusqueda = () => {
 /**  FUNCIONES PRINCIPALES  */ 
 
 
-const crearTarjetasDeComics = (data) => {
+const crearTarjetasDeComics = (data, container) => {
   console.log("Listando tarjetas de comics...")
 
   ocultar(loader)
@@ -77,7 +77,7 @@ const crearTarjetasDeComics = (data) => {
       imgComic = "/images/img-not-found"
     }
 
-    contenedorDeCards.innerHTML += `
+    container.innerHTML += `
     <article class="card-comic-simple-contenedor">        
       <div class="comic-img-contenedor ">              
         <img src="${imgComic}.${comic.thumbnail.extension}" />        
@@ -124,9 +124,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
                <div class= "personajes-contenedor">
                    <h3>Personajes</h3>
                    <h4><span class="cantidad-personajes">${comicCardElegida.characters.available}</span> ENCONTRADOS</h4>
-                   <div class= "personajes-cards-contenedor">
-                   
-                   </div>               
+                   <div class= "personajes-cards-contenedor"></div>                                            
                </div>
            </div>      
            `;
@@ -144,27 +142,22 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 
 
   // rellenar tarjetas de personajes dentro de la card comic detalle
-  const personajes = comicCardElegida.characters.items
-  const todasLasCardsDePersonajes = $(".personajes-cards-contenedor")
+  const urlPersonajesDelComic = comicCardElegida.characters.collectionURI
 
-  personajes.forEach(personaje => {
-
-    todasLasCardsDePersonajes.innerHTML += `
-                <article class= "card-personaje-simple">
-                    <div class="personaje-img-contenedor">              
-                        <img src="${buscarImagenDePersonaje(personaje.resourceURI)}.jpg"/>        
-                    </div>   
-                    <div class="personaje-nombre-contenedor">
-                        <h3 class="personaje-nombre">${personaje.name}</h3>
-                    </div>
-                </article> 
-            `
-  }) // cierra el foreach de personajes
-
-
+  fetch(`${urlPersonajesDelComic}?apikey=${API_KEY}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      console.log(data)   
+      const personajesContenedor = $(".personajes-cards-contenedor")
+      crearTarjetasDePersonajes(data, personajesContenedor)
+    }) 
 }
 
-const crearTarjetasDePersonajes = (data) => {
+
+
+const crearTarjetasDePersonajes = (data, container) => {
   console.log("Creando tarjetas de personajes...")
 
   ocultar(loader)
@@ -184,7 +177,7 @@ const crearTarjetasDePersonajes = (data) => {
       imgPersonaje = "/images/img-not-found"
     }
 
-    contenedorDeCards.innerHTML += `
+    container.innerHTML += `
     
     <article class= "card-personaje-simple-contenedor">
         <div class="personaje-img-contenedor">              
@@ -234,6 +227,19 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   `
 
   // rellenar tarjetas de comics en los que aparece este personaje
+  const urlComicsDelPersonaje = personajeCardElegida.series.collectionURI
+
+  fetch(`${urlComicsDelPersonaje}?apikey=${API_KEY}`)
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      console.log(data)   
+      const comicsContenedor = $(".comics-cards-contenedor")
+      crearTarjetasDeComics(data, comicsContenedor)
+    }) 
+
+
 }
 
 
@@ -254,9 +260,9 @@ const listarCards = (url) => {
       console.log(data)
 
       if(tipo === "comics") {
-        crearTarjetasDeComics(data)
+        crearTarjetasDeComics(data, contenedorDeCards)
       }else {
-        crearTarjetasDePersonajes(data)
+        crearTarjetasDePersonajes(data, contenedorDeCards)
       } 
 
       
@@ -375,7 +381,6 @@ const actualizarBusqueda = () => {
     if (busqueda.length) {
       queryParams = actualizarQueryParams(`&nameStartWith=${busqueda.value}`)
     }
-
     if (orden.value === 'a-z') {
       queryParams = actualizarQueryParams(`${busquedaValue}&orderBy=name`)
     }
