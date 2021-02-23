@@ -87,7 +87,7 @@ const buscarComicPorId = (id) => {
 const crearTarjetasDeComics = (data, container) => {
   console.log("Listando tarjetas de comics...")
 
-  ocultar(loader)
+  //ocultar(loader)
   let comics = data.data.results
   console.log(comics)
 
