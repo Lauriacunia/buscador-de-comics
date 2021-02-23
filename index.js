@@ -81,13 +81,22 @@ const buscarComicPorId = (id) => {
 
 }
 
+const formatearFecha = (fecha) => {
+  console.log(fecha)
+  let fechaSeparadaDeHora = fecha.split("T")
+  console.log(fechaSeparadaDeHora)
+  fecha = fechaSeparadaDeHora[0];
+  fecha = fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  return fecha
+}
+
 /**  FUNCIONES PRINCIPALES  */ 
 
 
 const crearTarjetasDeComics = (data, container) => {
   console.log("Listando tarjetas de comics...")
 
-  //ocultar(loader)
+  ocultar(loader)
   let comics = data.data.results
   console.log(comics)
 
@@ -157,7 +166,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
                    <div class= "comic-contenido-contenedor">
                        <h1 class= "comic-contenido-titulo">${comicCardElegida.title}</h2>
                        <h3>Publicado:</h3>
-                       <p>${Date(comicCardElegida.dates[1].date)}</p>
+                       <p>${formatearFecha(comicCardElegida.dates[1].date)}</p>
                        <h3>Guionistas:</h3> 
                        <p class= "guionistas-nombres"></p>
                
@@ -478,7 +487,6 @@ const inicializar = () => {
 
 
 inicializar();
-
 
 
 
