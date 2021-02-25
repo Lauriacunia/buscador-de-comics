@@ -130,7 +130,6 @@ const crearTarjetasDeComics = (data, container) => {
   todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
       comicCard.onclick = () => {
 
-        //let comicCardElegida = comics[cardIndice];
          let comicCardElegidaId = comics[cardIndice].id
          console.log(comicCardElegidaId)
       
@@ -151,6 +150,11 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
   console.log(comicCardElegida)
 
   let imgComic = comicCardElegida.thumbnail.path;
+  let descripcion = comicCardElegida.description;
+
+  if(descripcion === null || descripcion === "") {
+    descripcion = "Lo sentimos, no hay información disponible"
+  }
    
   if(imgComic === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
     imgComic = "/images/img-not-found"
@@ -171,7 +175,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
                        <p class= "guionistas-nombres"></p>
                
                        <h3>Descripción: </h3>
-                       <p>${comicCardElegida.title}</p>
+                       <p>${descripcion}</p>
                    </div>
                </div>
  
@@ -186,14 +190,20 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 
   // rellenar creadores
   const creadores = comicCardElegida.creators.items
+  const creadoresQty = comicCardElegida.creators.available
+  console.log(creadores)
   const guionistasNombres = $(".guionistas-nombres")
 
-  creadores.forEach(creador => {
+  if(creadoresQty === 0) {
+    guionistasNombres.innerHTML = "Lo sentimos, no hay información disponible"
+  }else {
+    creadores.forEach(creador => {
     guionistasNombres.innerHTML += `
-              ${creador.name} - 
+              ${creador.name} •  
               `
-  }) //cierra foreach de creadores
-
+    }) 
+  }
+    
 
   // rellenar tarjetas de personajes dentro de la card comic detalle
   const urlPersonajesDelComic = comicCardElegida.characters.collectionURI
@@ -277,10 +287,15 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   console.log(personajeCardElegida)
 
   let imgPersonaje = personajeCardElegida.thumbnail.path;
+  let descripcion = personajeCardElegida.description;
 
-    if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
-      imgPersonaje = "/images/img-not-found"
-    }
+  if(descripcion === null  || descripcion === "") {
+    descripcion = "Lo sentimos, no hay descripción disponible"
+  }
+
+  if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+    imgPersonaje = "/images/img-not-found"
+  }
 
   contenedorDeCards.innerHTML = `
       <div class="card-detalle-contenedor">
@@ -291,7 +306,7 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
             <div class="personaje-contenido-contenedor">
               <h1 class="personaje-contenido-nombre">${personajeCardElegida.name}</h2>
               <h3>Descripción:</h3>
-              <p>${personajeCardElegida.description}</p>
+              <p>${descripcion}</p>
             </div>
         </div>
 
