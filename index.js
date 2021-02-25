@@ -16,7 +16,10 @@ const resultadosTitulo = $(".resultados-titulo-contenedor");
 const cantidadDeResultados = $(".cantidad-resultados")
 const contenedorDeCards = $(".resultados-cards-contenedor");
 const loader = $(".loader-contenedor");
-
+const selectMasNuevos = $(".nuevos");
+const selectMasViejos = $(".viejos");
+const selectOrden = $("#orden");
+console.log(selectOrden)
 
 /**  RUTAS */
 
@@ -465,6 +468,21 @@ formulario.onsubmit = (e) => {
 
 }
 
+const ocultarOpcionesMasNuevosOViejos = () => {
+  console.log("cambiaste el select")
+  
+  if(selectOrden === "personajes") {
+    ocultar(selectMasNuevos)
+    ocultar(selectMasViejos)
+  }else {
+    mostrar(selectMasNuevos)
+    mostrar(selectMasViejos)
+  }
+
+}
+
+
+//selectOrden.addEventListener('change', ocultarOpcionesMasNuevosOViejos);
 
 /***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
  *    BOTONES HOME Y BACK
