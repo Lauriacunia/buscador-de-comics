@@ -1,14 +1,7 @@
 .loader-contenedor {
 	display:flex;
     justify-content: center;
-	align-items: center;
-	position:absolute;
-	top: calc(50vh - 150px);
-	left: calc(50vw - 150px);
-	z-index:1;
-	width: 300px;
-	height: 300px;
-
+	margin-bottom: 100px;
 	.loader {
 		border: 5px solid #911b64;
 		border-radius: 100%;
