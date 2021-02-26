@@ -22,6 +22,14 @@ const selectMasViejos = $(".viejos");
 const selectTipo= $("#tipo");
 const selectOrden= $("#orden")
 
+/**   BOTONES DE PAGINACION  */
+
+const pagAnterior = $(".pagina-anterior")
+const pagSiguiente = $(".pagina-siguiente")
+const pagPrimera = $(".pagina-primera")
+const pagUltima = $(".pagina-ultima")
+const botonesPaginacion = $$(".paginacion-btn")
+
 
 /**  RUTAS */
 
@@ -105,6 +113,13 @@ const formatearFecha = (fecha) => {
   fecha = fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
   return fecha
 }
+
+
+
+  
+ 
+
+
 
 /**  FUNCIONES PRINCIPALES  */ 
 
@@ -364,6 +379,7 @@ const listarCards = (url) => {
   const tipo = $("#tipo").value;
   ultimaBusqueda = url;
 
+
   fetch(`${url}`)
     .then((res) => {
       return res.json()
@@ -396,21 +412,26 @@ const listarCards = (url) => {
 
       console.log(`Última Pagina Disponible: ${ultimaPaginaDisponible}`)
 
-      /**   BOTONES DE PAGINACION  */
+     
+      // habilitar o deshabilitar botones
 
-      const pagAnterior = $(".pagina-anterior")
-      const pagSiguiente = $(".pagina-siguiente")
-      const pagPrimera = $(".pagina-primera")
-      const pagUltima = $(".pagina-ultima")
-      const botonesPaginacion = $$(".paginacion-btn")
+      if(paginaActual === 0) {
+        pagAnterior.disabled = true;
+        pagPrimera.disabled = true;
+      }else {
+        pagAnterior.disabled = false;
+        pagPrimera.disabled = false;
+      }
 
-      // if(paginaActual === 0) {
-      //   pagAnterior.disable
-      //   pagPrimera.disable
-      // }else {
-      //   pagAnterior.available
-      //   pagPrimera.avaible 
-      // }
+
+      if(paginaActual === ultimaPaginaDisponible) {
+        pagSiguiente.disabled = true;
+        pagUltima.disabled = true;
+      }else {
+        pagSiguiente.disabled = false;
+        pagUltima.disabled = false;
+      }
+
 
       botonesPaginacion.forEach((btnPaginacion) => {
         btnPaginacion.onclick = () => {
