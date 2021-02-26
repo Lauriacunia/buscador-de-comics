@@ -5,8 +5,9 @@ const $$ = (selector) => document.querySelectorAll(selector)
 const API_KEY = 'b1ee9360739b9c7554ec7be096d4d06f'
 const BASE_URL = 'https://gateway.marvel.com/v1/public'
 
-let offset = 0
+
 let paginaActual = 0
+let offset = paginaActual*20;
 let ultimaBusqueda = ""
 let comicEncontrado = {}
 
@@ -18,8 +19,9 @@ const contenedorDeCards = $(".resultados-cards-contenedor");
 const loader = $(".loader-contenedor");
 const selectMasNuevos = $(".nuevos");
 const selectMasViejos = $(".viejos");
-const selectOrden = $("#orden");
-console.log(selectOrden)
+const selectTipo= $("#tipo");
+const selectOrden= $("#orden")
+
 
 /**  RUTAS */
 
@@ -469,20 +471,20 @@ formulario.onsubmit = (e) => {
 }
 
 const ocultarOpcionesMasNuevosOViejos = () => {
-  console.log("cambiaste el select")
-  
-  if(selectOrden === "personajes") {
+  console.log("cambiaste el select tipo a: ")
+  console.log(selectTipo.value)
+
+  if(selectTipo.value === 'personajes') {
     ocultar(selectMasNuevos)
     ocultar(selectMasViejos)
   }else {
     mostrar(selectMasNuevos)
     mostrar(selectMasViejos)
   }
-
 }
 
+selectTipo.addEventListener('change', ocultarOpcionesMasNuevosOViejos);
 
-//selectOrden.addEventListener('change', ocultarOpcionesMasNuevosOViejos);
 
 /***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
  *    BOTONES HOME Y BACK
