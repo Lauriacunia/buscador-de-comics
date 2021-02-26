@@ -5,8 +5,9 @@ const $$ = (selector) => document.querySelectorAll(selector)
 const API_KEY = 'b1ee9360739b9c7554ec7be096d4d06f'
 const BASE_URL = 'https://gateway.marvel.com/v1/public'
 
-let offset = 0
+
 let paginaActual = 0
+let offset = 0;
 let ultimaBusqueda = ""
 let comicEncontrado = {}
 
@@ -16,6 +17,18 @@ const resultadosTitulo = $(".resultados-titulo-contenedor");
 const cantidadDeResultados = $(".cantidad-resultados")
 const contenedorDeCards = $(".resultados-cards-contenedor");
 const loader = $(".loader-contenedor");
+const selectMasNuevos = $(".nuevos");
+const selectMasViejos = $(".viejos");
+const selectTipo= $("#tipo");
+const selectOrden= $("#orden")
+
+/**   BOTONES DE PAGINACION  */
+
+const pagAnterior = $(".pagina-anterior")
+const pagSiguiente = $(".pagina-siguiente")
+const pagPrimera = $(".pagina-primera")
+const pagUltima = $(".pagina-ultima")
+const botonesPaginacion = $$(".paginacion-btn")
 
 
 /**  RUTAS */
@@ -35,6 +48,17 @@ const actualizarQueryParams = (query) => {
   queryParams += query;
   return queryParams
 }
+
+const actualizarOffset = () => {
+  offset = paginaActual*20;
+}
+
+const actualizarNroDePagina = (masOmenos) => {
+ paginaActual = paginaActual + masOmenos;
+ console.log(paginaActual)
+ actualizarOffset();
+}
+
 
 const borrarContenidoHTML = (elemento) => {
   elemento.innerHTML = ``;
@@ -90,6 +114,13 @@ const formatearFecha = (fecha) => {
   return fecha
 }
 
+
+
+  
+ 
+
+
+
 /**  FUNCIONES PRINCIPALES  */ 
 
 
@@ -130,7 +161,6 @@ const crearTarjetasDeComics = (data, container) => {
   todasLasCardsDeComics.forEach((comicCard, cardIndice) => {
       comicCard.onclick = () => {
 
-        //let comicCardElegida = comics[cardIndice];
          let comicCardElegidaId = comics[cardIndice].id
          console.log(comicCardElegidaId)
       
@@ -151,6 +181,11 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
   console.log(comicCardElegida)
 
   let imgComic = comicCardElegida.thumbnail.path;
+  let descripcion = comicCardElegida.description;
+
+  if(descripcion === null || descripcion === "") {
+    descripcion = "Lo sentimos, no hay información disponible"
+  }
    
   if(imgComic === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
     imgComic = "/images/img-not-found"
@@ -171,7 +206,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
                        <p class= "guionistas-nombres"></p>
                
                        <h3>Descripción: </h3>
-                       <p>${comicCardElegida.title}</p>
+                       <p>${descripcion}</p>
                    </div>
                </div>
  
@@ -186,14 +221,20 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 
   // rellenar creadores
   const creadores = comicCardElegida.creators.items
+  const creadoresQty = comicCardElegida.creators.available
+  console.log(creadores)
   const guionistasNombres = $(".guionistas-nombres")
 
-  creadores.forEach(creador => {
+  if(creadoresQty === 0) {
+    guionistasNombres.innerHTML = "Lo sentimos, no hay información disponible"
+  }else {
+    creadores.forEach(creador => {
     guionistasNombres.innerHTML += `
-              ${creador.name} - 
+              ${creador.name} •  
               `
-  }) //cierra foreach de creadores
-
+    }) 
+  }
+    
 
   // rellenar tarjetas de personajes dentro de la card comic detalle
   const urlPersonajesDelComic = comicCardElegida.characters.collectionURI
@@ -277,10 +318,15 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   console.log(personajeCardElegida)
 
   let imgPersonaje = personajeCardElegida.thumbnail.path;
+  let descripcion = personajeCardElegida.description;
 
-    if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
-      imgPersonaje = "/images/img-not-found"
-    }
+  if(descripcion === null  || descripcion === "") {
+    descripcion = "Lo sentimos, no hay descripción disponible"
+  }
+
+  if(imgPersonaje === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available") {
+    imgPersonaje = "/images/img-not-found"
+  }
 
   contenedorDeCards.innerHTML = `
       <div class="card-detalle-contenedor">
@@ -291,7 +337,7 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
             <div class="personaje-contenido-contenedor">
               <h1 class="personaje-contenido-nombre">${personajeCardElegida.name}</h2>
               <h3>Descripción:</h3>
-              <p>${personajeCardElegida.description}</p>
+              <p>${descripcion}</p>
             </div>
         </div>
 
@@ -324,13 +370,15 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
 
 const listarCards = (url) => {
   console.log("Listando cards...")
-  console.log(url)
+  console.log(`Fetch a URL: ${url}`)
+  console.log(`Estas en la pagina ${paginaActual}, oofset: ${offset}`)
 
   borrarContenidoHTML(contenedorDeCards);
   mostrar(resultadosTitulo);
   mostrar(cantidadDeResultados);
   const tipo = $("#tipo").value;
   ultimaBusqueda = url;
+
 
   fetch(`${url}`)
     .then((res) => {
@@ -345,6 +393,85 @@ const listarCards = (url) => {
         crearTarjetasDePersonajes(data, contenedorDeCards)
       } 
 
+
+      /***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
+       *                PAGINACION
+       **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
+
+      const totalDeResultados = data.data.total
+      console.log(totalDeResultados)
+      const resto = totalDeResultados % 20;
+      console.log(resto)
+      let ultimaPaginaDisponible = 0;
+
+      if(resto === 0) {
+        ultimaPaginaDisponible = (totalDeResultados/20) - 1
+      }else {
+        ultimaPaginaDisponible = (totalDeResultados - resto)/20
+      }
+
+      console.log(`Última Pagina Disponible: ${ultimaPaginaDisponible}`)
+
+     
+      // habilitar o deshabilitar botones
+
+      if(paginaActual === 0) {
+        pagAnterior.disabled = true;
+        pagPrimera.disabled = true;
+      }else {
+        pagAnterior.disabled = false;
+        pagPrimera.disabled = false;
+      }
+
+
+      if(paginaActual === ultimaPaginaDisponible) {
+        pagSiguiente.disabled = true;
+        pagUltima.disabled = true;
+      }else {
+        pagSiguiente.disabled = false;
+        pagUltima.disabled = false;
+      }
+
+
+      botonesPaginacion.forEach((btnPaginacion) => {
+        btnPaginacion.onclick = () => {
+          if (btnPaginacion.classList.contains('pagina-primera')) {
+
+            paginaActual = 0;
+            actualizarOffset();
+            actualizarBusqueda();
+
+          } else if (btnPaginacion.classList.contains('pagina-anterior')) {
+
+            actualizarNroDePagina(-1)
+            actualizarBusqueda()
+
+          } else if (btnPaginacion.classList.contains('pagina-siguiente')) {
+
+            actualizarNroDePagina(1)
+            actualizarBusqueda()
+
+          } else if (btnPaginacion.classList.contains('pagina-ultima')) {
+
+            paginaActual = ultimaPaginaDisponible;
+            actualizarOffset();
+            actualizarBusqueda();
+
+          } else {
+
+            mostrarTarjetasDeComics(getComics);
+          }
+        }
+      })
+
+
+
+
+
+
+
+
+
     }) // cierra el then
     .catch((err) => {
       console.log(err)
@@ -353,32 +480,6 @@ const listarCards = (url) => {
 
 };
 
-
-/***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
- *                PAGINACION
- **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
-
-const pagAnterior = $(".pagina-anterior")
-const pagSiguiente = $(".pagina-siguiente")
-const pagPrimera = $(".pagina-primera")
-const pagUltima = $(".pagina-ultima")
-const botonesPaginacion = $$(".paginacion-btn")
-
-botonesPaginacion.forEach((btnPaginacion) => {
-  btnPaginacion.onclick = () => {
-    if (btnPaginacion.classList.contains('pagina-primera')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-anterior')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-siguiente')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-ultima')) {
-      mostrarTarjetasDeComics(getComics);
-    } else {
-      mostrarTarjetasDeComics(getComics);
-    }
-  }
-})
 
 const actualizarBusqueda = () => {
 
@@ -445,10 +546,26 @@ formulario.onsubmit = (e) => {
   console.log("enviaste el formulario")
   e.preventDefault();
   mostrar(loader);
-
-  actualizarBusqueda()
+  paginaActual = 0;
+  actualizarOffset();
+  actualizarBusqueda();
 
 }
+
+const ocultarOpcionesMasNuevosOViejos = () => {
+  console.log("cambiaste el select tipo a: ")
+  console.log(selectTipo.value)
+
+  if(selectTipo.value === 'personajes') {
+    ocultar(selectMasNuevos)
+    ocultar(selectMasViejos)
+  }else {
+    mostrar(selectMasNuevos)
+    mostrar(selectMasViejos)
+  }
+}
+
+selectTipo.addEventListener('change', ocultarOpcionesMasNuevosOViejos);
 
 
 /***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
@@ -487,8 +604,4 @@ const inicializar = () => {
 
 
 inicializar();
-
-
-
-
 
