@@ -7,7 +7,7 @@ const BASE_URL = 'https://gateway.marvel.com/v1/public'
 
 
 let paginaActual = 0
-let offset = paginaActual*20;
+let offset = 0;
 let ultimaBusqueda = ""
 let comicEncontrado = {}
 
@@ -40,6 +40,17 @@ const actualizarQueryParams = (query) => {
   queryParams += query;
   return queryParams
 }
+
+const actualizarOffset = () => {
+  offset = paginaActual*20;
+}
+
+const actualizarNroDePagina = (masOmenos) => {
+ paginaActual = paginaActual + masOmenos;
+ console.log(paginaActual)
+ actualizarOffset();
+}
+
 
 const borrarContenidoHTML = (elemento) => {
   elemento.innerHTML = ``;
@@ -344,7 +355,8 @@ const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
 
 const listarCards = (url) => {
   console.log("Listando cards...")
-  console.log(url)
+  console.log(`Fetch a URL: ${url}`)
+  console.log(`Estas en la pagina ${paginaActual}, oofset: ${offset}`)
 
   borrarContenidoHTML(contenedorDeCards);
   mostrar(resultadosTitulo);
@@ -365,6 +377,80 @@ const listarCards = (url) => {
         crearTarjetasDePersonajes(data, contenedorDeCards)
       } 
 
+
+      /***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
+       *                PAGINACION
+       **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
+
+      const totalDeResultados = data.data.total
+      console.log(totalDeResultados)
+      const resto = totalDeResultados % 20;
+      console.log(resto)
+      let ultimaPaginaDisponible = 0;
+
+      if(resto === 0) {
+        ultimaPaginaDisponible = (totalDeResultados/20) - 1
+      }else {
+        ultimaPaginaDisponible = (totalDeResultados - resto)/20
+      }
+
+      console.log(`Última Pagina Disponible: ${ultimaPaginaDisponible}`)
+
+      /**   BOTONES DE PAGINACION  */
+
+      const pagAnterior = $(".pagina-anterior")
+      const pagSiguiente = $(".pagina-siguiente")
+      const pagPrimera = $(".pagina-primera")
+      const pagUltima = $(".pagina-ultima")
+      const botonesPaginacion = $$(".paginacion-btn")
+
+      // if(paginaActual === 0) {
+      //   pagAnterior.disable
+      //   pagPrimera.disable
+      // }else {
+      //   pagAnterior.available
+      //   pagPrimera.avaible 
+      // }
+
+      botonesPaginacion.forEach((btnPaginacion) => {
+        btnPaginacion.onclick = () => {
+          if (btnPaginacion.classList.contains('pagina-primera')) {
+
+            paginaActual = 0;
+            actualizarOffset();
+            actualizarBusqueda();
+
+          } else if (btnPaginacion.classList.contains('pagina-anterior')) {
+
+            actualizarNroDePagina(-1)
+            actualizarBusqueda()
+
+          } else if (btnPaginacion.classList.contains('pagina-siguiente')) {
+
+            actualizarNroDePagina(1)
+            actualizarBusqueda()
+
+          } else if (btnPaginacion.classList.contains('pagina-ultima')) {
+
+            paginaActual = ultimaPaginaDisponible;
+            actualizarOffset();
+            actualizarBusqueda();
+
+          } else {
+
+            mostrarTarjetasDeComics(getComics);
+          }
+        }
+      })
+
+
+
+
+
+
+
+
+
     }) // cierra el then
     .catch((err) => {
       console.log(err)
@@ -373,32 +459,6 @@ const listarCards = (url) => {
 
 };
 
-
-/***☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*
- *                PAGINACION
- **☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*――*☆*/
-
-const pagAnterior = $(".pagina-anterior")
-const pagSiguiente = $(".pagina-siguiente")
-const pagPrimera = $(".pagina-primera")
-const pagUltima = $(".pagina-ultima")
-const botonesPaginacion = $$(".paginacion-btn")
-
-botonesPaginacion.forEach((btnPaginacion) => {
-  btnPaginacion.onclick = () => {
-    if (btnPaginacion.classList.contains('pagina-primera')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-anterior')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-siguiente')) {
-      mostrarTarjetasDeComics(getComics);
-    } else if (btnPaginacion.classList.contains('pagina-ultima')) {
-      mostrarTarjetasDeComics(getComics);
-    } else {
-      mostrarTarjetasDeComics(getComics);
-    }
-  }
-})
 
 const actualizarBusqueda = () => {
 
@@ -465,8 +525,9 @@ formulario.onsubmit = (e) => {
   console.log("enviaste el formulario")
   e.preventDefault();
   mostrar(loader);
-
-  actualizarBusqueda()
+  paginaActual = 0;
+  actualizarOffset();
+  actualizarBusqueda();
 
 }
 
@@ -522,8 +583,4 @@ const inicializar = () => {
 
 
 inicializar();
-
-
-
-
 
