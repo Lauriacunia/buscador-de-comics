@@ -2,9 +2,13 @@
 @import "../base/tipography";
 
 .busquedas-contenedor {
-    @extend %in-stack;
-    padding: 20px 60px;
+    /*Male: tuve muchos problemas haciendo el extend de las clases
+    in-line  in-stack o in-grid. Aca por ejemplo no me pisaba el aling-items,
+    por eso decidi usar sintaxis de css*/
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    padding: 20px 60px;   
     font-family: $tipografia-principal;
     background-color: black;
     color: white;
@@ -14,12 +18,93 @@
     }
 }
 
-.filtros-contenedor {
-    @extend %in-line;
+.filtros-contenedor {   
+    display: flex; 
     justify-content: space-between;
 }
 
 .botones-contenedor {
     display:flex;
     justify-content: flex-end;    
+}
+
+
+.formulario {
+    display:flex;
+
+    padding-right: 20px;  
+    font-family: $tipografia-principal;
+
+    div {
+        display:flex;
+    }
+    label {
+        display:flex;
+        align-items: center;
+    }
+
+    select {
+        font-size: 14px;
+        font-weight: bold;
+        border: 0;
+        margin-left: 15px;
+    }
+    @media (max-width: 1024px) { 
+        flex-direction: column;
+        align-items: flex-start;
+
+        flex-grow: 2;
+        i {
+            font-size: 20px;
+        }
+        .buscador-input-contenedor {
+            width: 100%;
+            margin-bottom: 5px;
+            padding-right: 0;
+        }
+      
+        div {
+            margin-top: 5px;
+            width: 100%;    
+        }
+     
+        div>label {
+            flex-direction: column;
+            align-items: flex-start;
+            
+            select {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        button {
+            margin:0px;
+            height: fit-content;
+        }
+    }
+}
+
+#input-search {
+    border: 0;
+    border-bottom: 2px solid #151515;
+    width: 100%;
+    padding: 5px 15px;
+    border-radius: 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.search-icon {
+    padding-right: 10px;
+}
+
+.filtros-contenedor {
+    width: 100%;
+    label {
+        padding-right: 10px;
+    }
+}
+.buscador-input-contenedor {
+    @extend %in-line;
+ 
 }
