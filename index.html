@@ -30,9 +30,9 @@
     <!--************ FORMULARIO ********************-->
     <div class="busquedas-contenedor">
         <h2 class="busqueda-titulo">Búsqueda</h2>
+
         <div class="filtros-contenedor">
             <form class="formulario">
-                
                 <label for="buscador-input" class="buscador-input-contenedor">
                     <i class="fas fa-search search-icon" aria-hidden="true">
                     </i>
@@ -40,9 +40,10 @@
                         aria-label="Ingresá tu búsqueda">
                     </input>
                 </label>
+              
                 
-                <div>
-                    <div>
+                <div class="contenedor-selects">
+                    <div class="contenedor-tipo-orden">
                         <label>TIPO
                             <select name="tipo" id="tipo">
                                 <option value="comics" selected>COMICS</option>
@@ -60,9 +61,12 @@
                         </label>
                     </div>
                     
-                    <button type="submit" class="boton-buscar">
-                        <span>buscar</span>
-                    </button>
+                    <div class= "boton-buscar-contenedor">
+                        <button type="submit" class="boton-buscar">
+                            <span>buscar</span>
+                        </button>
+                    </div>
+                   
                           
                 </div>
             </form>

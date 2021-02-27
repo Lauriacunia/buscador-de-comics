@@ -12,6 +12,10 @@ header {
         height: 35px;
     }
 }
+
+.logo-contenedor {
+    @extend %in-line
+}
 .logo {
     background-color: #ed1d23;
     color: #fff;
@@ -30,27 +34,4 @@ header {
     }
 }
 
-.hero {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    img {
-        width: 100%;
-    }
-    @media (max-width: 992px){
-        height: 350px;
-    }
-    @media (max-width: 768px){
-        height: 300px;
-    }
-    @media (max-width: 576px){
-        height: 230px;
-    }
-    @media (max-width: 360px){
-        height: 180px;
-    }
-}
 
-.logo-contenedor {
-    @extend %in-line
-}
