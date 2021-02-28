@@ -6,7 +6,7 @@
 .card-comic-simple-contenedor {
     @extend %is-stack !optional;
     @extend %is-clickeable !optional;
-    width: calc(100% / 5 - 2 * 10px);;
+    width: calc(100% / 5 - 2 * 10px);
     margin: 0 10px 30px;
     
     &:hover {
