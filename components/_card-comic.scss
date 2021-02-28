@@ -64,6 +64,8 @@
     display:flex;
     .comic-img-contenedor {
         display:flex;
+        //Male: probe solo dandole width pero con algunas imagenes
+        //no quedaba bien. Lo ate con alambre...
         max-width: 370px;
         min-width: 370px;
         height: auto ;
