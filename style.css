@@ -97,7 +97,7 @@
   align-items: center;
 }
 
-.comics-cards-contenedor, .personajes-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -135,9 +135,9 @@
     width: calc(100% / 2 - 2 * 10px);
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 500px) {
   .card-comic-simple-contenedor {
-    width: calc(100% - 2 * 10px);
+    width: 260px;
   }
 }
 
@@ -149,8 +149,10 @@
   display: flex;
 }
 .card-comic-detalle-contenedor .comic-img-contenedor {
-  max-width: 350px;
-  margin-right: 50px;
+  display: flex;
+  max-width: 370px;
+  min-width: 370px;
+  height: auto;
 }
 .card-comic-detalle-contenedor .comic-img-contenedor img {
   width: 100%;
@@ -167,10 +169,10 @@
   margin: 20px 0px;
 }
 
-.comics-cards-contenedor article {
+.personajes-cards-contenedor article {
   margin-right: 20px;
 }
-.comics-cards-contenedor article .comic-img-contenedor {
+.personajes-cards-contenedor article .comic-img-contenedor {
   height: 330px;
 }
 
@@ -196,7 +198,7 @@
   align-items: center;
 }
 
-.comics-cards-contenedor, .personajes-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -205,7 +207,7 @@
 .card-personaje-simple-contenedor {
   margin: 0 10px 40px;
   box-shadow: 10px 5px 5px #bdb9b9;
-  width: calc(100% / 5 - 2 * 10px);
+  width: calc(100% / 6 - 2 * 10px);
   position: relative;
 }
 .card-personaje-simple-contenedor:hover img {
@@ -215,7 +217,7 @@
   background-color: #ed1d23;
 }
 .card-personaje-simple-contenedor .personaje-img-contenedor {
-  flex-grow: 1;
+  height: 250px;
   border-bottom: 4px solid #ed1d23;
   overflow: hidden;
 }
@@ -238,28 +240,51 @@
   font-family: "Roboto", sans-serif;
 }
 @media (max-width: 992px) {
+  .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1024px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% / 5 - 2 * 10px);
+  }
+}
+@media (max-width: 840px) {
   .card-personaje-simple-contenedor {
     width: calc(100% / 4 - 2 * 10px);
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 750px) {
   .card-personaje-simple-contenedor {
-    width: calc(100% / 2 - 2 * 10px);
+    width: calc(100% / 3 - 2 * 10px);
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 650px) {
   .card-personaje-simple-contenedor {
-    width: calc(100% - 2 * 10px);
+    width: calc(100%/2 - 2 * 10px);
   }
+}
+@media (max-width: 500px) {
+  .card-personaje-simple-contenedor {
+    width: 260px;
+  }
+}
+
+.card-detalle-contenedor {
+  display: flex;
+  flex-direction: column;
 }
 
 .card-personaje-detalle-contenedor {
   font-family: "Roboto", sans-serif;
   display: flex;
+  margin-left: 10px;
 }
 .card-personaje-detalle-contenedor .personaje-img-contenedor {
-  max-width: 350px;
-  margin-right: 50px;
+  display: flex;
+  max-width: 370px;
+  min-width: 370px;
+  height: auto;
 }
 .card-personaje-detalle-contenedor .personaje-img-contenedor img {
   width: 100%;
@@ -273,7 +298,48 @@
 }
 
 .comics-contenedor h3, .comics-contenedor h4 {
-  margin: 20px 0px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.comics-cards-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  /*Male: no logre entender porque me maqueta diferente
+  estas cards dependiendo si están dentro de seccion principal
+  o dentro del contenedor comics-contenedor aqui.
+  Esta fue la mejor solucion que encontre domesticando
+  las imagenes para poder reutilizar la funcion crear card 
+  en ambos contenedores*/
+}
+@media (max-width: 500px) {
+  .comics-cards-contenedor {
+    justify-content: center;
+  }
+}
+.comics-cards-contenedor .comic-img-contenedor {
+  height: 330px;
+}
+@media (max-width: 1200px) {
+  .comics-cards-contenedor .comic-img-contenedor {
+    height: 330px;
+  }
+}
+@media (max-width: 768px) {
+  .comics-cards-contenedor .comic-img-contenedor {
+    height: 350px;
+  }
+}
+@media (max-width: 658px) {
+  .comics-cards-contenedor .comic-img-contenedor {
+    height: 300px;
+  }
+}
+@media (max-width: 568px) {
+  .comics-cards-contenedor .comic-img-contenedor {
+    height: 250px;
+  }
 }
 
 .loader-contenedor {
@@ -320,7 +386,7 @@
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -414,7 +480,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -452,7 +518,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -486,12 +552,10 @@ header {
   display: flex;
   flex-wrap: wrap;
 }
-
-.card {
-  padding: 15px;
-  margin: 15px;
-  border-radius: 5px;
-  transition: 0.3s;
+@media (max-width: 500px) {
+  .resultados-cards-contenedor {
+    justify-content: center;
+  }
 }
 
 .card-comic-simple-contenedor, .card-personaje-simple-contenedor {
@@ -516,7 +580,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -571,7 +635,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -742,7 +806,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;

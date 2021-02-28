@@ -7,6 +7,7 @@
     @extend %is-stack !optional;
     @extend %is-clickeable !optional;
     width: calc(100% / 5 - 2 * 10px);
+    
     margin: 0 10px 30px;
     
     &:hover {
@@ -23,6 +24,7 @@
         box-shadow: 0 26px 24px -16px rgb(0 0 0 / 40%);
         img {
             width: 100%;
+            
         }
     }
 
@@ -41,10 +43,9 @@
       @media (max-width: 768px) {
         width: calc(100% / 2 - 2 * 10px);  
       }
-      @media (max-width: 430px){
-        width: calc(100% - 2 * 10px);  
+      @media (max-width: 500px){
+        width: 260px; 
       }
-    
 
 }
   
@@ -62,8 +63,11 @@
 .card-comic-detalle-contenedor {
     display:flex;
     .comic-img-contenedor {
-        max-width: 350px;
-        margin-right: 50px;
+        display:flex;
+        max-width: 370px;
+        min-width: 370px;
+        height: auto ;
+
         img {
             width: 100%;
         }
@@ -88,7 +92,7 @@
        @extend %in-grid;
 }
 
-.comics-cards-contenedor {
+.personajes-cards-contenedor {
     @extend %is-stack !optional;
     article {
         margin-right: 20px;

@@ -26,13 +26,10 @@
 .resultados-cards-contenedor {
     display:flex;
 	flex-wrap: wrap;
+	@media (max-width: 500px){
+		justify-content: center;
+	 }
 	
 }
 
 
-.card {
-	padding: 15px;
-	margin: 15px;
-	border-radius: 5px;
-	transition: 0.3s;
-}
