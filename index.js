@@ -19,6 +19,8 @@ const selectMasNuevos = $(".nuevos");
 const selectMasViejos = $(".viejos");
 const selectTipo = $("#tipo");
 const selectOrden = $("#orden");
+const paginaActualHTML = $(".pagina-actual")
+const paginasTotalesHTML = $(".paginas-totales")
 
 /**   BOTONES DE PAGINACION  */
 
@@ -388,6 +390,9 @@ const listarCards = (url) => {
       }
 
       console.log(`Última Pagina Disponible: ${ultimaPaginaDisponible}`);
+
+      paginaActualHTML.innerHTML = `${paginaActual + 1}`;
+      paginasTotalesHTML.innerHTML = ultimaPaginaDisponible;
 
       // habilitar o deshabilitar botones
 
