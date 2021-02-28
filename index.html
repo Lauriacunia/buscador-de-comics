@@ -30,9 +30,9 @@
     <!--************ FORMULARIO ********************-->
     <div class="busquedas-contenedor">
         <h2 class="busqueda-titulo">Búsqueda</h2>
+
         <div class="filtros-contenedor">
             <form class="formulario">
-
                 <label for="buscador-input" class="buscador-input-contenedor">
                     <i class="fas fa-search search-icon" aria-hidden="true">
                     </i>
@@ -40,32 +40,47 @@
                         aria-label="Ingresá tu búsqueda">
                     </input>
                 </label>
+              
+                
+                <div class="contenedor-selects">
+                    <div class="contenedor-tipo-orden">
+                        <label>TIPO
+                            <select name="tipo" id="tipo">
+                                <option value="comics" selected>COMICS</option>
+                                <option value="personajes">PERSONAJES</option>
+                            </select>
+                        </label>
 
-                <label>TIPO
-                    <select name="tipo" id="tipo">
-                        <option value="comics" selected>COMICS</option>
-                        <option value="personajes">PERSONAJES</option>
-                    </select>
-                </label>
-
-                <label>ORDEN
-                    <select name="orden" id="orden">
-                        <option value="a-z" selected>A-Z</option>
-                        <option value="z-a">Z-A</option>
-                        <option class= "nuevos" value="mas-nuevos">MAS NUEVOS</option>
-                        <option class ="viejos" value="mas-viejos">MAS VIEJOS</option>
-                    </select>
-                </label>
-
-                <button type="submit" class="boton-buscar">
-                    Buscar
-                </button>
-
+                        <label>ORDEN
+                            <select name="orden" id="orden">
+                                <option value="a-z" selected>A-Z</option>
+                                <option value="z-a">Z-A</option>
+                                <option class= "nuevos" value="mas-nuevos">MAS NUEVOS</option>
+                                <option class ="viejos" value="mas-viejos">MAS VIEJOS</option>
+                            </select>
+                        </label>
+                    </div>
+                    
+                    <div class= "boton-buscar-contenedor">
+                        <button type="submit" class="boton-buscar">
+                            <span>buscar</span>
+                        </button>
+                    </div>
+                   
+                          
+                </div>
             </form>
 
             <div class="botones-contenedor">
-                <button class="boton-inicio"><i class="fas fa-home"></i>Inicio</button>
-                <button class="boton-volver"><i class="fas fa-undo"></i>Volver</button>
+                <button class="boton-volver">
+                    <i class="fas fa-undo"></i>
+                    <span>volver</span>
+                </button>
+                <button class="boton-inicio">
+                    <i class="fas fa-home"></i>
+                    <span>inicio</span>
+                </button>
+               
             </div>
         </div>
 
