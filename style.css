@@ -41,7 +41,8 @@
   box-shadow: 0 0 10px 0 #1d66ed inset, 0 0 10px 4px #1d66ed;
 }
 
-.boton-inicio, .boton-volver {
+.boton-inicio,
+.boton-volver {
   font-size: 16px;
   letter-spacing: 2px;
   font-weight: lighter;
@@ -58,19 +59,23 @@
   border: 1px solid white;
   transition: 0.2s;
 }
-.boton-inicio i, .boton-volver i {
+.boton-inicio i,
+.boton-volver i {
   padding-right: 5px;
 }
-.boton-inicio:hover, .boton-volver:hover {
+.boton-inicio:hover,
+.boton-volver:hover {
   background-color: #1d66ed;
   border: 1px solid #1d66ed;
 }
 @media (max-width: 1200px) {
-  .boton-inicio, .boton-volver {
+  .boton-inicio,
+.boton-volver {
     font-size: 28px;
     border: transparent;
   }
-  .boton-inicio span, .boton-volver span {
+  .boton-inicio span,
+.boton-volver span {
     display: none;
   }
 }
@@ -157,15 +162,35 @@
 .card-comic-detalle-contenedor .comic-img-contenedor img {
   width: 100%;
 }
+@media (max-width: 750px) {
+  .card-comic-detalle-contenedor {
+    flex-direction: column;
+  }
+}
 
 .comic-contenido-contenedor {
   margin-left: 20px;
 }
-.comic-contenido-contenedor h1, .comic-contenido-contenedor h3, .comic-contenido-contenedor p {
+.comic-contenido-contenedor h1,
+.comic-contenido-contenedor h3,
+.comic-contenido-contenedor p {
   margin: 20px;
 }
+@media (max-width: 750px) {
+  .comic-contenido-contenedor h1,
+.comic-contenido-contenedor h3,
+.comic-contenido-contenedor p {
+    margin-left: 0;
+  }
+}
+@media (max-width: 750px) {
+  .comic-contenido-contenedor {
+    margin-left: 0;
+  }
+}
 
-.personajes-contenedor h3, .personajes-contenedor h4 {
+.personajes-contenedor h3,
+.personajes-contenedor h4 {
   margin: 20px 0px;
 }
 
@@ -261,7 +286,7 @@
 }
 @media (max-width: 650px) {
   .card-personaje-simple-contenedor {
-    width: calc(100%/2 - 2 * 10px);
+    width: calc(100% / 2 - 2 * 10px);
   }
 }
 @media (max-width: 500px) {
@@ -289,15 +314,35 @@
 .card-personaje-detalle-contenedor .personaje-img-contenedor img {
   width: 100%;
 }
+@media (max-width: 750px) {
+  .card-personaje-detalle-contenedor {
+    flex-direction: column;
+  }
+}
 
 .personaje-contenido-contenedor {
   margin-left: 20px;
 }
-.personaje-contenido-contenedor h1, .personaje-contenido-contenedor h3, .personaje-contenido-contenedor p {
+.personaje-contenido-contenedor h1,
+.personaje-contenido-contenedor h3,
+.personaje-contenido-contenedor p {
   margin: 20px;
 }
+@media (max-width: 750px) {
+  .personaje-contenido-contenedor h1,
+.personaje-contenido-contenedor h3,
+.personaje-contenido-contenedor p {
+    margin-left: 0;
+  }
+}
+@media (max-width: 750px) {
+  .personaje-contenido-contenedor {
+    margin-left: 0;
+  }
+}
 
-.comics-contenedor h3, .comics-contenedor h4 {
+.comics-contenedor h3,
+.comics-contenedor h4 {
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -307,11 +352,11 @@
   display: flex;
   flex-wrap: wrap;
   /*Male: no logre entender porque me maqueta diferente
-  estas cards dependiendo si están dentro de seccion principal
-  o dentro del contenedor comics-contenedor aqui.
-  Esta fue la mejor solucion que encontre domesticando
-  las imagenes para poder reutilizar la funcion crear card 
-  en ambos contenedores*/
+    estas cards dependiendo si están dentro de seccion principal
+    o dentro del contenedor comics-contenedor aqui.
+    Esta fue la mejor solucion que encontre domesticando
+    las imagenes para poder reutilizar la funcion crear card 
+    en ambos contenedores*/
 }
 @media (max-width: 500px) {
   .comics-cards-contenedor {
@@ -643,8 +688,8 @@ header {
 
 .busquedas-contenedor {
   /*Male: tuve muchos problemas haciendo el extend de las clases
-  in-line  in-stack o in-grid. Aca por ejemplo no me pisaba el aling-items,
-  por eso decidi usar sintaxis de css*/
+    in-line  in-stack o in-grid. Aca por ejemplo no me pisaba el aling-items,
+    por eso decidi usar sintaxis de css*/
   display: flex;
   flex-direction: column;
   align-items: flex-start;

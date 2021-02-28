@@ -10,7 +10,8 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
 
-    <title>PROYECTO COMICS ADA</title>
+    <title>BUSCADOR DE COMICS</title>
+
 </head>
 
 <body>
@@ -25,12 +26,9 @@
         <img src="images\hero.jpg" />
     </div>
 
-
-
     <!--************ FORMULARIO ********************-->
     <div class="busquedas-contenedor">
         <h2 class="busqueda-titulo">Búsqueda</h2>
-
         <div class="filtros-contenedor">
             <form class="formulario">
                 <label for="buscador-input" class="buscador-input-contenedor">
@@ -39,9 +37,7 @@
                     <input type="text" id="input-search" placeholder="Ingresá tu búsqueda"
                         aria-label="Ingresá tu búsqueda">
                     </input>
-                </label>
-              
-                
+                </label>               
                 <div class="contenedor-selects">
                     <div class="contenedor-tipo-orden">
                         <label>TIPO
@@ -50,7 +46,6 @@
                                 <option value="personajes">PERSONAJES</option>
                             </select>
                         </label>
-
                         <label>ORDEN
                             <select name="orden" id="orden">
                                 <option value="a-z" selected>A-Z</option>
@@ -59,18 +54,14 @@
                                 <option class ="viejos" value="mas-viejos">MAS VIEJOS</option>
                             </select>
                         </label>
-                    </div>
-                    
+                    </div>                   
                     <div class= "boton-buscar-contenedor">
                         <button type="submit" class="boton-buscar">
                             <span>buscar</span>
                         </button>
-                    </div>
-                   
-                          
+                    </div>                         
                 </div>
             </form>
-
             <div class="botones-contenedor">
                 <button class="boton-volver">
                     <i class="fas fa-undo"></i>
@@ -79,15 +70,11 @@
                 <button class="boton-inicio">
                     <i class="fas fa-home"></i>
                     <span>inicio</span>
-                </button>
-               
+                </button>              
             </div>
         </div>
-
     </div>
  
-   
-
     <!--************ SECCION PRINCIPAL ********************-->
     <section class="seccion-principal">
         <div class="resultados-titulo-contenedor">
@@ -97,14 +84,11 @@
         <div class="resultados-cards-contenedor"></div>
     </section>
 
-
-
     <!--************ LOADER ********************-->
     
     <div class="loader-contenedor is-hidden">
         <div class="loader"></div>  
     </div>
-
 
     <!--************ PAGINACION ********************-->
 
@@ -130,10 +114,6 @@
             <p>Hecho con ❤️ por Ada</p>
         </div>
     </footer>
-
-
-    <!-- <img src="http://i.annihil.us/u/prod/marvel/i/mg/6/00/6026d944c0e3a.jpg">
- -->
 
     <script src="index.js"></script>
 
