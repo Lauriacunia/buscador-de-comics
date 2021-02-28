@@ -24,29 +24,30 @@ $blue: #1d66ed;
   color: #fff;
   box-shadow: 0 0 40px 40px $blue inset, 0 0 0 0 $blue;
   transition: all 150ms ease-in-out;
-  
+
   &:hover {
     box-shadow: 0 0 10px 0 $blue inset, 0 0 10px 4px $blue;
   }
-
 }
 
-.boton-inicio, .boton-volver {
+.boton-inicio,
+.boton-volver {
   @include boton;
-  display:flex;
+  display: flex;
   align-items: center;
   border: 1px solid white;
   transition: 0.2s;
+  
   &:hover {
-      background-color: $blue;
-      border: 1px solid $blue;
-    }
+    background-color: $blue;
+    border: 1px solid $blue;
+  }
 
-    @media (max-width: 1200px) { 
-      font-size: 28px;
-      border: transparent;
-      span {
-        display: none;
-      }
-     }
+  @media (max-width: 1200px) {
+    font-size: 28px;
+    border: transparent;
+    span {
+      display: none;
+    }
+  }
 }
