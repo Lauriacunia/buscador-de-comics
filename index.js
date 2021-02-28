@@ -21,6 +21,7 @@ const selectTipo = $("#tipo");
 const selectOrden = $("#orden");
 const paginaActualHTML = $(".pagina-actual")
 const paginasTotalesHTML = $(".paginas-totales")
+const paginaActualContenedor = $(".pagina-actual-contenedor")
 
 /**   BOTONES DE PAGINACION  */
 
@@ -105,6 +106,25 @@ const formatearFecha = (fecha) => {
   return fecha;
 };
 
+const ocultarPaginacion = () => {
+  console.log("ocultandoPaginacion")
+  ocultar(pagAnterior)
+  ocultar(pagSiguiente)
+  ocultar(pagPrimera)
+  ocultar(pagUltima) 
+  ocultar(paginaActualContenedor)
+};
+
+const mostarPaginacion = () => {
+  console.log("mostrandoPaginacion")
+  mostrar(pagAnterior)
+  mostrar(pagSiguiente)
+  mostrar(pagPrimera)
+  mostrar(pagUltima) 
+  mostrar(paginaActualContenedor)  
+};
+
+
 /**  FUNCIONES PRINCIPALES  */
 
 const crearTarjetasDeComics = (data, container) => {
@@ -160,6 +180,7 @@ const crearTarjetasDeComics = (data, container) => {
 const crearTarjetaDetalleDeComic = (comicCardElegida) => {
   console.log("Creando tarjeta detalle de comic:");
   console.log(comicCardElegida);
+  ocultarPaginacion();
 
   let imgComic = comicCardElegida.thumbnail.path;
   let descripcion = comicCardElegida.description;
@@ -297,6 +318,7 @@ const crearTarjetasDePersonajes = (data, container) => {
 const crearTarjetaDetalleDePersonaje = (personajeCardElegida) => {
   console.log("Creando tarjeta detalle de personaje...");
   console.log(personajeCardElegida);
+  ocultarPaginacion();
 
   let imgPersonaje = personajeCardElegida.thumbnail.path;
   let descripcion = personajeCardElegida.description;
@@ -357,6 +379,7 @@ const listarCards = (url) => {
   borrarContenidoHTML(contenedorDeCards);
   mostrar(resultadosTitulo);
   mostrar(cantidadDeResultados);
+  mostarPaginacion()
   const tipo = $("#tipo").value;
   ultimaBusqueda = url;
 
@@ -392,7 +415,7 @@ const listarCards = (url) => {
       console.log(`Última Pagina Disponible: ${ultimaPaginaDisponible}`);
 
       paginaActualHTML.innerHTML = `${paginaActual + 1}`;
-      paginasTotalesHTML.innerHTML = ultimaPaginaDisponible;
+      paginasTotalesHTML.innerHTML = `${ultimaPaginaDisponible+ 1}`;
 
       // habilitar o deshabilitar botones
 
@@ -529,6 +552,8 @@ const botonVolver = $(".boton-volver");
 
 botonInicio.onclick = () => {
   resetearValoresDeBusqueda();
+  paginaActual = 0;
+  actualizarOffset();
   console.log("clickeaste home");
   inicializar();
 };
