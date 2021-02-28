@@ -7,7 +7,7 @@
     @extend %is-stack !optional;
     @extend %is-clickeable !optional;
     width: calc(100% / 5 - 2 * 10px);;
-    margin-bottom: 20px;
+    margin: 0 10px 30px;
     
     &:hover {
         .comic-img-contenedor{
@@ -34,6 +34,17 @@
           font-size: 14px;
         }       
       }
+
+      @media (max-width: 992px) {
+          width: calc(100% / 4 - 2 * 10px);  
+      }
+      @media (max-width: 768px) {
+        width: calc(100% / 2 - 2 * 10px);  
+      }
+      @media (max-width: 430px){
+        width: calc(100% - 2 * 10px);  
+      }
+    
 
 }
   

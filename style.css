@@ -97,7 +97,7 @@
   align-items: center;
 }
 
-.resultados-cards-contenedor, .comics-cards-contenedor, .personajes-cards-contenedor {
+.comics-cards-contenedor, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -105,7 +105,7 @@
 
 .card-comic-simple-contenedor {
   width: calc(100% / 5 - 2 * 10px);
-  margin-bottom: 20px;
+  margin: 0 10px 30px;
 }
 .card-comic-simple-contenedor:hover .comic-titulo {
   color: #ed1d23;
@@ -124,6 +124,21 @@
 }
 .card-comic-simple-contenedor .comic-titulo-contenedor .comic-titulo {
   font-size: 14px;
+}
+@media (max-width: 992px) {
+  .card-comic-simple-contenedor {
+    width: calc(100% / 4 - 2 * 10px);
+  }
+}
+@media (max-width: 768px) {
+  .card-comic-simple-contenedor {
+    width: calc(100% / 2 - 2 * 10px);
+  }
+}
+@media (max-width: 430px) {
+  .card-comic-simple-contenedor {
+    width: calc(100% - 2 * 10px);
+  }
 }
 
 .card-detalle-contenedor {
@@ -181,7 +196,7 @@
   align-items: center;
 }
 
-.resultados-cards-contenedor, .comics-cards-contenedor, .personajes-cards-contenedor {
+.comics-cards-contenedor, .personajes-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -190,8 +205,7 @@
 .card-personaje-simple-contenedor {
   margin: 0 10px 40px;
   box-shadow: 10px 5px 5px #bdb9b9;
-  height: 350px;
-  width: 210px;
+  width: calc(100% / 6 - 2 * 10px);
   position: relative;
 }
 .card-personaje-simple-contenedor:hover img {
@@ -210,16 +224,72 @@
   height: 100%;
 }
 .card-personaje-simple-contenedor .personaje-nombre-contenedor {
+  display: flex;
   padding: 16px 24px 17px 20px;
   background-color: #151515;
-  width: 210px;
+  width: 100%;
   color: white;
   transition: 0.2s;
 }
 .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+  font-size: 14px;
+  text-transform: uppercase;
   height: 79px;
   font-family: "Roboto", sans-serif;
-  text-align: center;
+}
+@media (max-width: 850px) {
+  .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+    font-size: 12px;
+  }
+}
+@media (max-width: 640px) {
+  .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+    font-size: 10px;
+  }
+}
+@media (max-width: 430px) {
+  .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+    font-size: 8px;
+  }
+}
+@media (max-width: 360px) {
+  .card-personaje-simple-contenedor .personaje-nombre-contenedor .personaje-nombre {
+    font-size: 8px;
+  }
+}
+@media (max-width: 1024px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% / 5 - 2 * 10px);
+  }
+}
+@media (max-width: 850px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% / 4 - 2 * 10px);
+  }
+}
+@media (max-width: 640px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% / 3 - 2 * 10px);
+  }
+  .card-personaje-simple-contenedor .personaje-nombre {
+    font-size: 10px;
+  }
+}
+@media (max-width: 430px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% / 2 - 2 * 10px);
+  }
+  .card-personaje-simple-contenedor .personaje-nombre {
+    font-size: 8px;
+  }
+}
+@media (max-width: 360px) {
+  .card-personaje-simple-contenedor {
+    width: calc(100% - 2 * 10px);
+  }
+  .card-personaje-simple-contenedor .personaje-nombre {
+    font-size: 8px;
+  }
 }
 
 .card-personaje-detalle-contenedor {
@@ -289,7 +359,7 @@
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -383,7 +453,7 @@ header {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -421,7 +491,7 @@ header {
   align-items: center;
 }
 
-.resultados-cards-contenedor, .personajes-cards-contenedor, .comics-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -439,6 +509,7 @@ header {
 }
 .seccion-principal .resultados-titulo-contenedor {
   padding-bottom: 30px;
+  margin-left: 10px;
 }
 .seccion-principal .resultados-titulo-contenedor h2 {
   padding-bottom: 10px;
@@ -451,7 +522,8 @@ header {
 }
 
 .resultados-cards-contenedor {
-  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card {
@@ -483,7 +555,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -538,7 +610,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -551,18 +623,13 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 60px;
+  padding: 20px 70px;
   font-family: "Roboto", sans-serif;
   background-color: black;
   color: white;
 }
 .busquedas-contenedor h2 {
   padding-bottom: 10px;
-}
-@media (max-width: 768px) {
-  .busquedas-contenedor {
-    padding: 15px 40px;
-  }
 }
 @media (max-width: 576px) {
   .busquedas-contenedor h2 {
@@ -702,7 +769,7 @@ header {
   align-items: center;
 }
 
-.personajes-cards-contenedor, .comics-cards-contenedor, .resultados-cards-contenedor {
+.personajes-cards-contenedor, .comics-cards-contenedor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
