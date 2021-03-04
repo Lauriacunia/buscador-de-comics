@@ -184,8 +184,9 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
 
   let imgComic = comicCardElegida.thumbnail.path;
   let descripcion = comicCardElegida.description;
+  let fecha = new Date(comicCardElegida.dates[1].date).toLocaleDateString();
 
-  if (descripcion === null || descripcion === "") {
+  if (!descripcion) {
     descripcion = "Lo sentimos, no hay información disponible";
   }
 
@@ -210,7 +211,7 @@ const crearTarjetaDetalleDeComic = (comicCardElegida) => {
                          comicCardElegida.title
                        }</h2>
                        <h3>Publicado:</h3>
-                       <p>${formatearFecha(comicCardElegida.dates[1].date)}</p>
+                       <p>${fecha === "Invalid Date" ? "No disponible": fecha}</p>
                        <h3>Guionistas:</h3> 
                        <p class= "guionistas-nombres"></p>
                
