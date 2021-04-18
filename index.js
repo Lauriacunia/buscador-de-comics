@@ -58,6 +58,8 @@ const actualizarNroDePagina = (masOmenos) => {
 };
 
 const borrarContenidoHTML = (elemento) => {
+  // preferimos comillas simples o dobles para strings vacios, 
+  // o strings que no tienen variables dentro 
   elemento.innerHTML = ``;
 };
 
@@ -79,6 +81,8 @@ const resetearValoresDeBusqueda = () => {
 };
 
 const buscarComicPorId = (id) => {
+  // no dejes nunca console log en una entrega!
+  // esto es muy importante, en un challenge tecnico esto no se perdona
   console.log("Buscando comic por id...");
   console.log(id);
 
@@ -101,6 +105,8 @@ const buscarComicPorId = (id) => {
 
 const formatearFecha = (fecha) => {
   let fechaSeparadaDeHora = fecha.split("T");
+
+  // proba como desafio hacer esto con Date()
   fecha = fechaSeparadaDeHora[0];
   fecha = fecha.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$3/$2/$1");
   return fecha;
@@ -143,6 +149,7 @@ const crearTarjetasDeComics = (data, container) => {
       imgComic ===
       "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"
     ) {
+      // aca agrega un punto antes de /images para que se vea en el sitio deployado
       imgComic = "/images/img-not-found";
     }
 
