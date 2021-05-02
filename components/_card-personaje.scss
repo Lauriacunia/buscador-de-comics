@@ -135,6 +135,12 @@
     Esta fue la mejor solucion que encontre domesticando
     las imagenes para poder reutilizar la funcion crear card 
     en ambos contenedores*/
+
+    // Si entiendo bien, te las maqueta diferente porque estas anidadas 
+    // adentro de otra etiqueta. Solo las .comic-img-contenedor que sean
+    // hijas de .comics-cards-contenedor van a tener este estilo. 
+    // Las que son hijas de .card-comic-simple-contenedor van a tener otro
+    // Creo que no estoy entendiendo yo tu duda. 
   .comic-img-contenedor {
     height: 330px;
     @media (max-width: 1200px) {

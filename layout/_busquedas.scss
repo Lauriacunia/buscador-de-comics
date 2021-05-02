@@ -5,9 +5,12 @@
   /*Male: tuve muchos problemas haciendo el extend de las clases
     in-line  in-stack o in-grid. Aca por ejemplo no me pisaba el aling-items,
     por eso decidi usar sintaxis de css*/
+
+    
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  // a mi esto me funciona lau! @extend %in-stack;
   padding: 20px 70px;
   font-family: $tipografia-principal;
   background-color: black;
